@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbifs8qb38hv8"]
+
+[ext_resource type="Script" uid="uid://bd8cjc07vnnt" path="res://src/minigames/magic/magic_caller_test.gd" id="1_f484t"]
+
+[node name="MagicCallerTest" type="Node2D" unique_id=724284893]
+script = ExtResource("1_f484t")

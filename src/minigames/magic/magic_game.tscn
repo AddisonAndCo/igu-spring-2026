@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cl10u7632wdrs"]
+
+[ext_resource type="Script" uid="uid://bvhvd0f1xk1jh" path="res://src/minigames/magic/magic_game.gd" id="1_ws7jt"]
+
+[node name="MagicGame" type="Node2D" unique_id=1107811993]
+script = ExtResource("1_ws7jt")
