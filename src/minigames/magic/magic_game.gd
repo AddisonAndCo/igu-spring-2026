@@ -15,13 +15,22 @@ class_name MagicGame extends Node
 # TODOE_NAME = "Ch
 # X define elemental enum
 # X define class that takes in enum and retrieves corresponding word bank
-# on class creation, randomize word bank and present to player
+# X on class creation, randomize word bank
+# present text, allow for styling
 # enable keyboard inputs to control cursor
 # set timer and scoring stuff
 
-static var bank_root = "res://assets/minigames/magic/"
+signal wrong_key_pressed
+signal magic_game_complete(magic_element: String, passed_threshold: bool)
 
-var bank: Array = []
+static var bank_root = "res://assets/minigames/magic/"
+const SUCCESS_THRESHOLD: int = 50 #wpm
+
+var bank: String = ""
+var index: int = 0
+
+var wpm: int = 0
+var timer_started_once: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,17 +43,49 @@ func _ready() -> void:
 	yfile.close()
 
 	var yraw = parser.parse(yaml)
-	bank = yraw['words']
+	var bank_arr = yraw['words']
 	randomize()
-	bank.shuffle()
+	bank_arr.shuffle()
 
-	print(bank)
+#	compensate for a word shortage by just duplicating the bank 5x
+	for i in range(5):
+		for word in bank_arr.slice(0, bank_arr.size() - 1):
+			bank += word + " "
+		bank += bank_arr[bank_arr.size() - 1]
 
+	$incomplete_words.push_color(Color.LIGHT_GRAY)
+	$incomplete_words.modulate.a = 0.8
+	$incomplete_words.add_text(bank)
+	$complete_words.push_color(Color.YELLOW)
+
+	$debug_counter.text = "idx: {0}".format([index])
+#	start a timer
+	wpm = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if $Timer.is_stopped() and !timer_started_once:
+		$Timer.start()
+
+	var input = event.as_text().to_lower()
+	input = " " if input == "space" else input
+
+	if (input == bank[index]):
+		$complete_words.text += bank[index]
+		index += 1
+		$debug_counter.text = "idx: {0}".format([index])
+		if (input == " "):
+			wpm += 1
+	else:
+		wrong_key_pressed.emit()
+
+func _on_timeout():
+	wpm = wpm * (60.0 / $Timer.wait_time)
+	$debug_counter.text = "wpm: {0}".format([wpm])
+	set_process_unhandled_key_input(false)
 
 # Factory function
 const magic_game_scene: PackedScene = preload("res://src/minigames/magic/magic_game.tscn")

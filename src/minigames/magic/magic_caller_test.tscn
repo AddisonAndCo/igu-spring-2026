@@ -2,5 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bd8cjc07vnnt" path="res://src/minigames/magic/magic_caller_test.gd" id="1_f484t"]
 
-[node name="MagicCallerTest" type="Node2D" unique_id=724284893]
+[sub_resource type="ViewportTexture" id="ViewportTexture_c1smp"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MagicCallerTest" type="Node3D" unique_id=603361474]
 script = ExtResource("1_f484t")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=930260534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.74710757)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=576184087]
+texture = SubResource("ViewportTexture_c1smp")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1887609980]
