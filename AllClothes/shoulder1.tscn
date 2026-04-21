@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds51p3tqp2iib"]
+
+[ext_resource type="Texture2D" uid="uid://bh2468io8yw1" path="res://Art for Shop Game/shoulder1.png" id="1_wdrot"]
+
+[sub_resource type="GDScript" id="GDScript_62xa3"]
+script/source = "extends Sprite2D
+var dragging : bool = false
+var locked: bool = false
+var of : Vector2 = Vector2(0,0)
+var home_pos : Vector2
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var area_2d: Area2D = $Area2D
+
+func _ready():
+  home_pos = global_position
+  z_index = 0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+  if dragging:
+    position = get_global_mouse_position() - of
+    z_index = 10 # Stays on top while dragging
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+  if locked:
+    return
+  if event is InputEventMouseButton:
+    if event.pressed:
+      dragging = true
+      z_index = 100
+      of = get_global_mouse_position() - global_position
+      get_viewport().set_input_as_handled() 
+    else:
+      dragging = false
+      check_snap()
+
+func check_snap():
+  for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        if global_position.distance_to(zone.global_position) < 180:
+            global_position = zone.global_position
+            if zone.get(\"snap_z_index\") != null:
+              z_index = zone.snap_z_index 
+            else:
+              z_index = 2 #debug fallback z index
+            audio_stream_player.play()
+            return
+"
+
+[node name="Sprite2D" type="Sprite2D" groups=["clothing"]]
+texture = ExtResource("1_wdrot")
+script = SubResource("GDScript_62xa3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-355, -1120, -467, -1129, -559, -1120, -625, -1107, -677, -1087, -732, -1071, -774, -1047, -817, -1024, -777, -1016, -720, -995, -708, -981, -753, -971, -797, -941, -846, -917, -854, -905, -790, -893, -774, -886, -813, -878, -856, -872, -894, -852, -923, -837, -869, -842, -810, -838, -741, -828, -666, -810, -613, -796, -545, -769, -499, -741, -455, -718, -434, -702, -405, -777, -375, -862, -361, -915, -351, -959, -343, -1039, -346, -1089)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(413, -1117, 446, -1124, 498, -1124, 547, -1126, 601, -1124, 657, -1111, 698, -1099, 738, -1090, 776, -1077, 820, -1054, 865, -1035, 886, -1023, 842, -1015, 797, -999, 774, -982, 788, -976, 836, -958, 888, -933, 916, -914, 903, -903, 865, -895, 840, -889, 900, -876, 947, -860, 981, -843, 914, -843, 841, -832, 772, -826, 702, -809, 633, -787, 575, -755, 521, -727, 495, -711, 445, -864, 415, -951, 409, -1030)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

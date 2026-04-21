@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b71mrpu3ctwfs"]
+
+[resource]
+cull_mode = 1
+grow = true
+grow_amount = 0.03

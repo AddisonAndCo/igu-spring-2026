@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://chdo4frnjeq0x"]
+
+[ext_resource type="Texture2D" uid="uid://bbi7dir357w7e" path="res://Art for Shop Game/helmet1.png" id="1_6jar3"]
+
+[sub_resource type="GDScript" id="GDScript_62xa3"]
+script/source = "extends Sprite2D
+var dragging : bool = false
+var locked: bool = false
+var of : Vector2 = Vector2(0,0)
+var home_pos : Vector2
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var area_2d: Area2D = $Area2D
+
+func _ready():
+  home_pos = global_position
+  z_index = 0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+  if dragging:
+    position = get_global_mouse_position() - of
+    z_index = 10 # Stays on top while dragging
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+  if locked:
+    return
+  if event is InputEventMouseButton:
+    if event.pressed:
+      dragging = true
+      z_index = 100
+      of = get_global_mouse_position() - global_position
+      get_viewport().set_input_as_handled() 
+    else:
+      dragging = false
+      check_snap()
+
+func check_snap():
+  for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        if global_position.distance_to(zone.global_position) < 180:
+            global_position = zone.global_position
+            if zone.get(\"snap_z_index\") != null:
+              z_index = zone.snap_z_index 
+            else:
+              z_index = 2 #debug fallback z index
+            audio_stream_player.play()
+            return
+"
+
+[node name="Sprite2D" type="Sprite2D" groups=["clothing"]]
+texture = ExtResource("1_6jar3")
+script = SubResource("GDScript_62xa3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(8, -474.5, 0.25, -469, -8.5, -464.25, -16, -458.5, -24.5, -451.75, -31.5, -446.5, -38, -439.75, -50.25, -425.5, -58.75, -413.25, -67, -402, -68.75, -396, -68.25, -380, -68.25, -369.75, -63.25, -340.75, -60.5, -322, -57.25, -311.75, -36.75, -304.25, -12.75, -298, -1, -297.5, 16.25, -296.5, 41, -301.25, 71.75, -309.25, 75.25, -313.25, 82, -342.5, 84.5, -353.75, 87, -371.75, 86.25, -396.25, 77.75, -413.25, 64.25, -430.25, 45.25, -450, 27.75, -464.25, 17.5, -471.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

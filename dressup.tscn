@@ -1,0 +1,130 @@
+[gd_scene load_steps=19 format=3 uid="uid://ddeje4in068a"]
+
+[ext_resource type="Script" path="res://dressuptest.gd" id="1_b5p66"]
+[ext_resource type="Texture2D" uid="uid://d2ke2myp6rbwx" path="res://Art for Shop Game/model_male.png" id="1_s3gf1"]
+[ext_resource type="PackedScene" uid="uid://ds51p3tqp2iib" path="res://AllClothes/shoulder1.tscn" id="3_7jytk"]
+[ext_resource type="FontFile" uid="uid://bt361p133in8e" path="res://ASTON SCRIPT.TTF" id="4_jmvxp"]
+[ext_resource type="PackedScene" uid="uid://31y2x5d4jajv" path="res://AllClothes/breastplate1.tscn" id="5_oqy0g"]
+[ext_resource type="PackedScene" uid="uid://cmj7j14v788af" path="res://AllClothes/cape1.tscn" id="6_55stl"]
+[ext_resource type="PackedScene" uid="uid://dkwmbmfs1gvhq" path="res://AllClothes/greaves1.tscn" id="7_56gbh"]
+[ext_resource type="PackedScene" uid="uid://chdo4frnjeq0x" path="res://AllClothes/helmet1.tscn" id="8_vpeps"]
+[ext_resource type="PackedScene" uid="uid://d3iyel3xkgtcd" path="res://AllClothes/helmet2.tscn" id="9_tqxck"]
+[ext_resource type="PackedScene" uid="uid://ds1xluyypa2ld" path="res://AllClothes/helmet3.tscn" id="10_hefvw"]
+[ext_resource type="PackedScene" uid="uid://cvhbc455qu8pj" path="res://AllClothes/pants1.tscn" id="11_bes58"]
+[ext_resource type="PackedScene" uid="uid://jd1a8ioykj7l" path="res://AllClothes/cape2.tscn" id="12_vosqe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elv6t"]
+radius = 332.074
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63pyf"]
+size = Vector2(854.125, 921.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eic7x"]
+size = Vector2(854.125, 1541)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkst8"]
+size = Vector2(1908.25, 536.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdj4j"]
+size = Vector2(1002, 464)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gctra"]
+size = Vector2(1248, 2487)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_b5p66")
+
+[node name="Finalize" type="Button" parent="."]
+offset_left = 1820.0
+offset_top = 1381.0
+offset_right = 3593.0
+offset_bottom = 1872.0
+theme_override_fonts/font = ExtResource("4_jmvxp")
+theme_override_font_sizes/font_size = 200
+text = "Done"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.15, 0.15)
+
+[node name="CHARACTERMODEL" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_s3gf1")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="helmet" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/helmet"]
+position = Vector2(27, -1527)
+shape = SubResource("CircleShape2D_elv6t")
+
+[node name="breastplate" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/breastplate"]
+position = Vector2(34, -675.625)
+shape = SubResource("RectangleShape2D_63pyf")
+debug_color = Color(0.943643, 5.48691e-06, 0.600689, 0.42)
+
+[node name="legs" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/legs"]
+position = Vector2(32.9375, 575.5)
+shape = SubResource("RectangleShape2D_eic7x")
+debug_color = Color(0.424798, 0.459852, 1, 0.42)
+
+[node name="shoulder" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/shoulder"]
+position = Vector2(15.875, -888.75)
+shape = SubResource("RectangleShape2D_wkst8")
+debug_color = Color(0.34902, 0.796078, 0.176471, 0.419608)
+
+[node name="feet" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/feet"]
+position = Vector2(46, 1571)
+shape = SubResource("RectangleShape2D_xdj4j")
+debug_color = Color(0.894273, 0.319941, 0.00590661, 0.42)
+
+[node name="cape" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/cape"]
+position = Vector2(22, 63.5)
+shape = SubResource("RectangleShape2D_gctra")
+debug_color = Color(0.472276, 0.589849, 0, 0.42)
+
+[node name="shoulder1" parent="." instance=ExtResource("3_7jytk")]
+z_index = 2
+position = Vector2(-2794, -877)
+
+[node name="breastplate1" parent="." instance=ExtResource("5_oqy0g")]
+z_index = 2
+position = Vector2(-3044, -99)
+
+[node name="cape1" parent="." instance=ExtResource("6_55stl")]
+position = Vector2(2754, -588)
+
+[node name="greaves1" parent="." instance=ExtResource("7_56gbh")]
+z_index = 2
+position = Vector2(-2980, 272)
+
+[node name="helmet1" parent="." instance=ExtResource("8_vpeps")]
+z_index = 2
+position = Vector2(-2018, 564)
+
+[node name="helmet2" parent="." instance=ExtResource("9_tqxck")]
+z_index = 2
+position = Vector2(-2025, 1526)
+
+[node name="helmet3" parent="." instance=ExtResource("10_hefvw")]
+z_index = 2
+position = Vector2(-3087, 1740)
+
+[node name="pants1" parent="." instance=ExtResource("11_bes58")]
+z_index = 2
+position = Vector2(-1783, 728)
+
+[node name="Sprite2D" parent="." instance=ExtResource("12_vosqe")]
+position = Vector2(-2907, 517)
+
+[connection signal="pressed" from="Finalize" to="." method="_on_button_pressed"]
