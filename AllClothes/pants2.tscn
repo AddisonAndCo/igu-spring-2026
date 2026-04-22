@@ -79,10 +79,10 @@ polygon = PackedVector2Array(-74.5, -78.75, -78, -72.75, -94.5, -33, -100, -18, 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=588775886]
 
 [node name="StatLabel" type="Label" parent="." unique_id=1255600694]
-offset_left = -1366.0
-offset_top = 589.0
-offset_right = -563.0
-offset_bottom = 753.0
-theme_override_font_sizes/font_size = 85
+offset_left = -1371.0
+offset_top = 867.0
+offset_right = -568.0
+offset_bottom = 1053.0
+theme_override_font_sizes/font_size = 100
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

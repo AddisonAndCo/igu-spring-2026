@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkwmbmfs1gvhq"]
+[gd_scene format=3 uid="uid://dkwmbmfs1gvhq"]
 
 [ext_resource type="Texture2D" uid="uid://dbe2bxnjyuctn" path="res://Art for Shop Game/greaves1.png" id="1_ned74"]
 
@@ -8,13 +8,19 @@ var dragging : bool = false
 var locked: bool = false
 var of : Vector2 = Vector2(0,0)
 var home_pos : Vector2
+var small_scale = Vector2(0.4, 0.4)
+var full_scale = Vector2(1.0, 1.0)
 
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
 @onready var area_2d: Area2D = $Area2D
+@export var stats: Array[String] = []
+@onready var stat_label = $StatLabel
 
 func _ready():
   home_pos = global_position
   z_index = 0
+  scale = small_scale
+  stat_label.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -27,39 +33,58 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
     return
   if event is InputEventMouseButton:
     if event.pressed:
+      scale = full_scale
+      of = get_global_mouse_position() - global_position
       dragging = true
       z_index = 100
-      of = get_global_mouse_position() - global_position
       get_viewport().set_input_as_handled() 
-    else:
+func _input(event: InputEvent) -> void:
+  if event is InputEventMouseButton and not event.pressed:
+    if dragging:
       dragging = false
       check_snap()
 
 func check_snap():
-  for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
         if global_position.distance_to(zone.global_position) < 180:
             global_position = zone.global_position
             if zone.get(\"snap_z_index\") != null:
-              z_index = zone.snap_z_index 
+                z_index = zone.snap_z_index
             else:
-              z_index = 2 #debug fallback z index
+                z_index = 2
+            print(\"snapped, stats: \", stats)
+            print(\"label visible: \", stat_label.visible)
+            print(\"label text: \", stat_label.text)    
             audio_stream_player.play()
+            z_index = 10
+            stat_label.visible = true
+            stat_label.text = \"\\n\".join(stats) # shows on new line
             return
+    scale = small_scale # If didn't snap, shrink it 
+    global_position = home_pos # Goes back to original position
+    stat_label.visible = false
 "
 
-[node name="Sprite2D" type="Sprite2D" groups=["clothing"]]
+[node name="Sprite2D" type="Sprite2D" unique_id=1815609671 groups=["clothing"]]
 texture = ExtResource("1_ned74")
 script = SubResource("GDScript_62xa3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=100674901]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=262264414]
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(-80.75, 341.25, -80.75, 352, -81.75, 361.25, -82.25, 371.75, -87.75, 380, -94, 390.75, -99.5, 399.75, -100.75, 410.5, -101.5, 426, -98.25, 438, -94.5, 445.75, -88, 447, -74, 444.25, -63, 432, -50.5, 419.25, -46, 408, -38.75, 396, -32, 381.25, -24.5, 368, -28, 359.25, -37, 349.5, -41.5, 356.75, -58.25, 360.5, -66.5, 358.25, -75.75, 352.5)
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D" unique_id=1706603702]
 polygon = PackedVector2Array(220, 1404, 201, 1414, 186, 1444, 177, 1469, 186, 1510, 223, 1599, 245, 1633, 297, 1720, 330, 1753, 366, 1779, 399, 1793, 447, 1788, 460, 1757, 472, 1721, 475, 1655, 461, 1586, 429, 1544, 399, 1491, 394, 1452, 399, 1395, 394, 1374, 385, 1392, 356, 1423, 307, 1442, 262, 1439, 230, 1426)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=996976382]
+
+[node name="StatLabel" type="Label" parent="." unique_id=724735599]
+offset_left = 666.0
+offset_top = 1504.0
+offset_right = 1469.0
+offset_bottom = 1722.0
+theme_override_font_sizes/font_size = 100
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

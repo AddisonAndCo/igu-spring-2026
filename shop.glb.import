@@ -3,12 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cjf8eo2qrt72x"
-valid=false
+uid="uid://bp6v7rlbnuqu3"
+path="res://.godot/imported/shop.glb-e7c1140b578d869a363e3b23f533682f.scn"
 
 [deps]
 
 source_file="res://shop.glb"
+dest_files=["res://.godot/imported/shop.glb-e7c1140b578d869a363e3b23f533682f.scn"]
 
 [params]
 
@@ -37,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1

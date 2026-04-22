@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmuv8vyxx75w7"]
+[gd_scene format=3 uid="uid://cmuv8vyxx75w7"]
 
-[ext_resource type="Script" path="res://character_body_3d.gd" id="1_ksu1u"]
-[ext_resource type="PackedScene" uid="uid://cjf8eo2qrt72x" path="res://shop.glb" id="1_r66bj"]
-[ext_resource type="Script" path="res://lantern_light.gd" id="2_un2pc"]
-[ext_resource type="Script" path="res://selecthighlight.gd" id="3_b5jwv"]
+[ext_resource type="Script" uid="uid://bbxo2ygwoxy17" path="res://character_body_3d.gd" id="1_ksu1u"]
+[ext_resource type="PackedScene" uid="uid://b2xjuofdt0pmw" path="res://shop.glb" id="1_r66bj"]
+[ext_resource type="Script" uid="uid://dwfac73a7s42h" path="res://lantern_light.gd" id="2_un2pc"]
+[ext_resource type="Script" uid="uid://c34uudxsew5ld" path="res://selecthighlight.gd" id="3_b5jwv"]
 [ext_resource type="Material" uid="uid://b71mrpu3ctwfs" path="res://outline_material.tres" id="4_p1ib0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egb7q"]

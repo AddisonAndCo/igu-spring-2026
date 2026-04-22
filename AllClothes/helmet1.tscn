@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://chdo4frnjeq0x"]
+[gd_scene format=3 uid="uid://chdo4frnjeq0x"]
 
 [ext_resource type="Texture2D" uid="uid://bbi7dir357w7e" path="res://Art for Shop Game/helmet1.png" id="1_6jar3"]
 
@@ -8,13 +8,19 @@ var dragging : bool = false
 var locked: bool = false
 var of : Vector2 = Vector2(0,0)
 var home_pos : Vector2
+var small_scale = Vector2(0.4, 0.4)
+var full_scale = Vector2(1.0, 1.0)
 
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
 @onready var area_2d: Area2D = $Area2D
+@export var stats: Array[String] = []
+@onready var stat_label = $StatLabel
 
 func _ready():
   home_pos = global_position
   z_index = 0
+  scale = small_scale
+  stat_label.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -27,36 +33,55 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
     return
   if event is InputEventMouseButton:
     if event.pressed:
+      scale = full_scale
+      of = get_global_mouse_position() - global_position
       dragging = true
       z_index = 100
-      of = get_global_mouse_position() - global_position
       get_viewport().set_input_as_handled() 
-    else:
+func _input(event: InputEvent) -> void:
+  if event is InputEventMouseButton and not event.pressed:
+    if dragging:
       dragging = false
       check_snap()
 
 func check_snap():
-  for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
         if global_position.distance_to(zone.global_position) < 180:
             global_position = zone.global_position
             if zone.get(\"snap_z_index\") != null:
-              z_index = zone.snap_z_index 
+                z_index = zone.snap_z_index
             else:
-              z_index = 2 #debug fallback z index
+                z_index = 2
+            print(\"snapped, stats: \", stats)
+            print(\"label visible: \", stat_label.visible)
+            print(\"label text: \", stat_label.text)    
             audio_stream_player.play()
+            z_index = 10
+            stat_label.visible = true
+            stat_label.text = \"\\n\".join(stats) # shows on new line
             return
+    scale = small_scale # If didn't snap, shrink it 
+    global_position = home_pos # Goes back to original position
+    stat_label.visible = false
 "
 
-[node name="Sprite2D" type="Sprite2D" groups=["clothing"]]
+[node name="Sprite2D" type="Sprite2D" unique_id=1619663616 groups=["clothing"]]
 texture = ExtResource("1_6jar3")
 script = SubResource("GDScript_62xa3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1106129981]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=14211731]
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(8, -474.5, 0.25, -469, -8.5, -464.25, -16, -458.5, -24.5, -451.75, -31.5, -446.5, -38, -439.75, -50.25, -425.5, -58.75, -413.25, -67, -402, -68.75, -396, -68.25, -380, -68.25, -369.75, -63.25, -340.75, -60.5, -322, -57.25, -311.75, -36.75, -304.25, -12.75, -298, -1, -297.5, 16.25, -296.5, 41, -301.25, 71.75, -309.25, 75.25, -313.25, 82, -342.5, 84.5, -353.75, 87, -371.75, 86.25, -396.25, 77.75, -413.25, 64.25, -430.25, 45.25, -450, 27.75, -464.25, 17.5, -471.5)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1847241850]
+
+[node name="StatLabel" type="Label" parent="." unique_id=599552249]
+offset_left = 415.0
+offset_top = -1889.0
+offset_right = 1218.0
+offset_bottom = -1671.0
+theme_override_font_sizes/font_size = 100
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3iyel3xkgtcd"]
+[gd_scene format=3 uid="uid://d3iyel3xkgtcd"]
 
 [ext_resource type="Texture2D" uid="uid://cp28f4jglmdtm" path="res://Art for Shop Game/helmet2.png" id="1_no1qv"]
 
@@ -8,13 +8,19 @@ var dragging : bool = false
 var locked: bool = false
 var of : Vector2 = Vector2(0,0)
 var home_pos : Vector2
+var small_scale = Vector2(0.4, 0.4)
+var full_scale = Vector2(1.0, 1.0)
 
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
 @onready var area_2d: Area2D = $Area2D
+@export var stats: Array[String] = []
+@onready var stat_label = $StatLabel
 
 func _ready():
   home_pos = global_position
   z_index = 0
+  scale = small_scale
+  stat_label.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -27,36 +33,55 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
     return
   if event is InputEventMouseButton:
     if event.pressed:
+      scale = full_scale
+      of = get_global_mouse_position() - global_position
       dragging = true
       z_index = 100
-      of = get_global_mouse_position() - global_position
       get_viewport().set_input_as_handled() 
-    else:
+func _input(event: InputEvent) -> void:
+  if event is InputEventMouseButton and not event.pressed:
+    if dragging:
       dragging = false
       check_snap()
 
 func check_snap():
-  for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
         if global_position.distance_to(zone.global_position) < 180:
             global_position = zone.global_position
             if zone.get(\"snap_z_index\") != null:
-              z_index = zone.snap_z_index 
+                z_index = zone.snap_z_index
             else:
-              z_index = 2 #debug fallback z index
+                z_index = 2
+            print(\"snapped, stats: \", stats)
+            print(\"label visible: \", stat_label.visible)
+            print(\"label text: \", stat_label.text)    
             audio_stream_player.play()
+            z_index = 10
+            stat_label.visible = true
+            stat_label.text = \"\\n\".join(stats) # shows on new line
             return
+    scale = small_scale # If didn't snap, shrink it 
+    global_position = home_pos # Goes back to original position
+    stat_label.visible = false
 "
 
-[node name="Sprite2D" type="Sprite2D" groups=["clothing"]]
+[node name="Sprite2D" type="Sprite2D" unique_id=1117781863 groups=["clothing"]]
 texture = ExtResource("1_no1qv")
 script = SubResource("GDScript_62xa3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2115549759]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1730054982]
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(7.5, -461.75, 2, -461.25, -5.5, -460, -7.5, -453.25, -19.5, -453, -28.5, -448.25, -30, -455.25, -33, -454, -43.75, -446.25, -54.75, -429.25, -60.25, -416.5, -67, -402, -68.75, -396, -68.25, -380, -68, -362, -62.25, -343.75, -55.5, -325.75, -45.5, -323.25, -27.75, -316, -11.75, -308.25, 1, -299.75, 8.75, -295, 15.5, -300, 34.25, -308.75, 53.75, -320.25, 73.75, -330.5, 82, -342.5, 84.5, -353.75, 87, -371.75, 83.75, -397.25, 79, -413.5, 73.75, -426.5, 66.5, -439, 59.5, -447.75, 48.5, -454.5, 47, -449, 36.75, -453.5, 27, -453.5, 24.25, -458.5, 17, -460.75)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1831340018]
+
+[node name="StatLabel" type="Label" parent="." unique_id=566422371]
+offset_left = 434.0
+offset_top = -1797.0
+offset_right = 1237.0
+offset_bottom = -1579.0
+theme_override_font_sizes/font_size = 100
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

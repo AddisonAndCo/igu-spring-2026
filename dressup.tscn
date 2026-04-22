@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://ddeje4in068a"]
+[gd_scene format=3 uid="uid://ddeje4in068a"]
 
-[ext_resource type="Script" path="res://dressuptest.gd" id="1_b5p66"]
+[ext_resource type="Script" uid="uid://cpgucdku27b1" path="res://dressuptest.gd" id="1_b5p66"]
 [ext_resource type="Texture2D" uid="uid://d2ke2myp6rbwx" path="res://Art for Shop Game/model_male.png" id="1_s3gf1"]
 [ext_resource type="PackedScene" uid="uid://ds51p3tqp2iib" path="res://AllClothes/shoulder1.tscn" id="3_7jytk"]
 [ext_resource type="FontFile" uid="uid://bt361p133in8e" path="res://ASTON SCRIPT.TTF" id="4_jmvxp"]
+[ext_resource type="PackedScene" uid="uid://d15j8kpsv1smr" path="res://AllClothes/shoulder2.tscn" id="5_eqgg3"]
 [ext_resource type="PackedScene" uid="uid://31y2x5d4jajv" path="res://AllClothes/breastplate1.tscn" id="5_oqy0g"]
 [ext_resource type="PackedScene" uid="uid://cmj7j14v788af" path="res://AllClothes/cape1.tscn" id="6_55stl"]
 [ext_resource type="PackedScene" uid="uid://dkwmbmfs1gvhq" path="res://AllClothes/greaves1.tscn" id="7_56gbh"]
@@ -12,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://ds1xluyypa2ld" path="res://AllClothes/helmet3.tscn" id="10_hefvw"]
 [ext_resource type="PackedScene" uid="uid://cvhbc455qu8pj" path="res://AllClothes/pants1.tscn" id="11_bes58"]
 [ext_resource type="PackedScene" uid="uid://jd1a8ioykj7l" path="res://AllClothes/cape2.tscn" id="12_vosqe"]
+[ext_resource type="PackedScene" uid="uid://ca14vlnltgy5s" path="res://AllClothes/pants2.tscn" id="13_m148i"]
+[ext_resource type="PackedScene" uid="uid://cih08sfcr80w0" path="res://AllClothes/greaves2.tscn" id="14_m6n5c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_elv6t"]
 radius = 332.074
@@ -31,10 +34,10 @@ size = Vector2(1002, 464)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gctra"]
 size = Vector2(1248, 2487)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1906638217]
 script = ExtResource("1_b5p66")
 
-[node name="Finalize" type="Button" parent="."]
+[node name="Finalize" type="Button" parent="." unique_id=1099132191]
 offset_left = 1820.0
 offset_top = 1381.0
 offset_right = 3593.0
@@ -43,88 +46,119 @@ theme_override_fonts/font = ExtResource("4_jmvxp")
 theme_override_font_sizes/font_size = 200
 text = "Done"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1456954953]
 zoom = Vector2(0.15, 0.15)
 
-[node name="CHARACTERMODEL" type="Sprite2D" parent="."]
+[node name="CHARACTERMODEL" type="Sprite2D" parent="." unique_id=378893]
 z_index = 1
 texture = ExtResource("1_s3gf1")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=656251141]
 
-[node name="helmet" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+[node name="helmet" type="Area2D" parent="Node2D" unique_id=1269796429 groups=["snap_zones"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/helmet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/helmet" unique_id=2041265043]
 position = Vector2(27, -1527)
 shape = SubResource("CircleShape2D_elv6t")
 
-[node name="breastplate" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+[node name="breastplate" type="Area2D" parent="Node2D" unique_id=1987278580 groups=["snap_zones"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/breastplate"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/breastplate" unique_id=405716705]
 position = Vector2(34, -675.625)
 shape = SubResource("RectangleShape2D_63pyf")
 debug_color = Color(0.943643, 5.48691e-06, 0.600689, 0.42)
 
-[node name="legs" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+[node name="legs" type="Area2D" parent="Node2D" unique_id=1916797932 groups=["snap_zones"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/legs"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/legs" unique_id=2118633982]
 position = Vector2(32.9375, 575.5)
 shape = SubResource("RectangleShape2D_eic7x")
 debug_color = Color(0.424798, 0.459852, 1, 0.42)
 
-[node name="shoulder" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+[node name="shoulder" type="Area2D" parent="Node2D" unique_id=248276522 groups=["snap_zones"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/shoulder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/shoulder" unique_id=233594794]
 position = Vector2(15.875, -888.75)
 shape = SubResource("RectangleShape2D_wkst8")
 debug_color = Color(0.34902, 0.796078, 0.176471, 0.419608)
 
-[node name="feet" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+[node name="feet" type="Area2D" parent="Node2D" unique_id=599319040 groups=["snap_zones"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/feet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/feet" unique_id=568395985]
 position = Vector2(46, 1571)
 shape = SubResource("RectangleShape2D_xdj4j")
 debug_color = Color(0.894273, 0.319941, 0.00590661, 0.42)
 
-[node name="cape" type="Area2D" parent="Node2D" groups=["snap_zones"]]
+[node name="cape" type="Area2D" parent="Node2D" unique_id=372780914 groups=["snap_zones"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/cape"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/cape" unique_id=768919291]
 position = Vector2(22, 63.5)
 shape = SubResource("RectangleShape2D_gctra")
 debug_color = Color(0.472276, 0.589849, 0, 0.42)
 
-[node name="shoulder1" parent="." instance=ExtResource("3_7jytk")]
+[node name="shoulder1" parent="." unique_id=957346370 instance=ExtResource("3_7jytk")]
 z_index = 2
-position = Vector2(-2794, -877)
+position = Vector2(-2086, 1915)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Wind Resistance"])
 
-[node name="breastplate1" parent="." instance=ExtResource("5_oqy0g")]
+[node name="shoulder2" parent="." unique_id=1150457886 instance=ExtResource("5_eqgg3")]
+position = Vector2(-2766, -1070)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Poison Resistance"])
+
+[node name="breastplate1" parent="." unique_id=78077236 instance=ExtResource("5_oqy0g")]
 z_index = 2
-position = Vector2(-3044, -99)
+position = Vector2(-3280, -229)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Cold Resistance"])
 
-[node name="cape1" parent="." instance=ExtResource("6_55stl")]
-position = Vector2(2754, -588)
+[node name="cape1" parent="." unique_id=479386519 instance=ExtResource("6_55stl")]
+position = Vector2(-1265, 422)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Wind Resistance"])
 
-[node name="greaves1" parent="." instance=ExtResource("7_56gbh")]
+[node name="cape2" parent="." unique_id=1963095339 instance=ExtResource("12_vosqe")]
+position = Vector2(-3289, 459)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Water Resistance"])
+
+[node name="greaves1" parent="." unique_id=793588251 instance=ExtResource("7_56gbh")]
 z_index = 2
-position = Vector2(-2980, 272)
+position = Vector2(-1711, -2341)
+scale = Vector2(0.7, 0.7)
+stats = Array[String](["+Cold Resistance"])
 
-[node name="helmet1" parent="." instance=ExtResource("8_vpeps")]
+[node name="greaves2" parent="." unique_id=1299147019 instance=ExtResource("14_m6n5c")]
+position = Vector2(-1223, 699)
+scale = Vector2(0.7, 0.7)
+
+[node name="helmet1" parent="." unique_id=520407690 instance=ExtResource("8_vpeps")]
 z_index = 2
-position = Vector2(-2018, 564)
+position = Vector2(-2522, 18)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Poison Resistance"])
 
-[node name="helmet2" parent="." instance=ExtResource("9_tqxck")]
+[node name="helmet2" parent="." unique_id=1542652533 instance=ExtResource("9_tqxck")]
 z_index = 2
-position = Vector2(-2025, 1526)
+position = Vector2(-2473, 891)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Water Resistance"])
 
-[node name="helmet3" parent="." instance=ExtResource("10_hefvw")]
+[node name="helmet3" parent="." unique_id=843832829 instance=ExtResource("10_hefvw")]
 z_index = 2
-position = Vector2(-3087, 1740)
+position = Vector2(-3494, -816)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Fire Resistance"])
 
-[node name="pants1" parent="." instance=ExtResource("11_bes58")]
+[node name="pants1" parent="." unique_id=974052682 instance=ExtResource("11_bes58")]
 z_index = 2
-position = Vector2(-1783, 728)
+position = Vector2(-2182, 679)
+scale = Vector2(0.5, 0.5)
+stats = Array[String](["+Electric Resistance"])
 
-[node name="Sprite2D" parent="." instance=ExtResource("12_vosqe")]
-position = Vector2(-2907, 517)
+[node name="pants2" parent="." unique_id=1605968673 instance=ExtResource("13_m148i")]
+position = Vector2(-1884, -989)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="Finalize" to="." method="_on_button_pressed"]
