@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b40swqlt341i8"
+path.s3tc="res://.godot/imported/shop_MASK LANTERN.jpg-83d9a7239b4219c82a375cc9b93524d5.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "c865704fa948c10ee5ce1ac827273342"
+}
+
+[deps]
+
+source_file="res://shop_MASK LANTERN.jpg"
+dest_files=["res://.godot/imported/shop_MASK LANTERN.jpg-83d9a7239b4219c82a375cc9b93524d5.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://shop_MASK LANTERN.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

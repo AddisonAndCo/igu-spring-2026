@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bn13rv8xpqp1g"
+path.s3tc="res://.godot/imported/shop_wooden_planks_59_color.jpg-2b63a8d9d17b9e27991ee9e3640c440e.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "0321f160cbadc5ae27cd669cf13018db"
+}
+
+[deps]
+
+source_file="res://shop_wooden_planks_59_color.jpg"
+dest_files=["res://.godot/imported/shop_wooden_planks_59_color.jpg-2b63a8d9d17b9e27991ee9e3640c440e.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

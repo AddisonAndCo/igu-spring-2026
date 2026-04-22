@@ -21,8 +21,9 @@ func _process(delta):
     # Climb up to Node3D with the hover script
     var hover_object = null
     if hit:
-        var parent = hit.get_parent() # MeshInstance3D
-        if parent:
+      print(hit.get_path())
+      var parent = hit.get_parent() # MeshInstance3D
+      if parent:
             var grandparent = parent.get_parent() # Node3D
             if grandparent and grandparent.has_method("on_hover_enter"):
                 hover_object = grandparent
@@ -44,7 +45,7 @@ func _input(event):
         
         # Clamp before applying
         head.rotation.x = clamp(new_x, deg_to_rad(-60), deg_to_rad(60))
-        head.rotation.y = clamp(new_y, deg_to_rad(-90), deg_to_rad(90))
+        head.rotation.y = clamp(new_y, deg_to_rad(-120), deg_to_rad(120))
     
     if event.is_action_pressed("ui_cancel"):
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
