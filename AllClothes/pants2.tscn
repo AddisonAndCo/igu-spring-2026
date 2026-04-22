@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://ca14vlnltgy5s"]
+
+[ext_resource type="Texture2D" uid="uid://dmfrynq6agmt0" path="res://Art for Shop Game/skirt&pants2.png" id="1_ou2sn"]
+
+[sub_resource type="GDScript" id="GDScript_62xa3"]
+script/source = "extends Sprite2D
+var dragging : bool = false
+var locked: bool = false
+var of : Vector2 = Vector2(0,0)
+var home_pos : Vector2
+var small_scale = Vector2(0.4, 0.4)
+var full_scale = Vector2(1.0, 1.0)
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
+@onready var area_2d: Area2D = $Area2D
+@export var stats: Array[String] = []
+@onready var stat_label = $StatLabel
+
+func _ready():
+  home_pos = global_position
+  z_index = 0
+  scale = small_scale
+  stat_label.visible = false
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+  if dragging:
+    position = get_global_mouse_position() - of
+    z_index = 10 # Stays on top while dragging
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+  if locked:
+    return
+  if event is InputEventMouseButton:
+    if event.pressed:
+      scale = full_scale
+      of = get_global_mouse_position() - global_position
+      dragging = true
+      z_index = 100
+      get_viewport().set_input_as_handled() 
+func _input(event: InputEvent) -> void:
+  if event is InputEventMouseButton and not event.pressed:
+    if dragging:
+      dragging = false
+      check_snap()
+
+func check_snap():
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        if global_position.distance_to(zone.global_position) < 180:
+            global_position = zone.global_position
+            if zone.get(\"snap_z_index\") != null:
+                z_index = zone.snap_z_index
+            else:
+                z_index = 2
+            print(\"snapped, stats: \", stats)
+            print(\"label visible: \", stat_label.visible)
+            print(\"label text: \", stat_label.text)    
+            audio_stream_player.play()
+            z_index = 10
+            stat_label.visible = true
+            stat_label.text = \"\\n\".join(stats) # shows on new line
+            return
+    scale = small_scale # If didn't snap, shrink it 
+    global_position = home_pos # Goes back to original position
+    stat_label.visible = false
+"
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1605968673 groups=["clothing"]]
+texture = ExtResource("1_ou2sn")
+script = SubResource("GDScript_62xa3")
+stats = Array[String](["+Fire Resistance"])
+
+[node name="Area2D" type="Area2D" parent="." unique_id=293950051]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=7096486]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-74.5, -78.75, -78, -72.75, -94.5, -33, -100, -18, -109.25, 12.5, -111.25, 27.25, -115.75, 67, -116.5, 92.25, -116.5, 101, -107.25, 85.25, -100.5, 73.25, -97.75, 71.25, -93, 114.25, -93.25, 133.5, -90.75, 147.5, -87.5, 169, -81.5, 162, -73.5, 153.25, -71.5, 154, -73, 167.5, -79.5, 173.75, -81, 175, -83.5, 182.75, -92, 205, -95.25, 223, -97, 239.25, -100, 269.75, -99.5, 283.25, -96.25, 288.75, -95.5, 294.25, -90.75, 311.5, -86.75, 327.25, -80.75, 333.25, -70.5, 334.75, -55.5, 334.5, -41, 331.5, -34.25, 299.5, -31.75, 291.25, -29.25, 278.25, -28.75, 251.5, -25.75, 239, -24.5, 229.75, -22.75, 203.75, -24, 195.75, -24.75, 189, -28.5, 191.25, -34.75, 192.25, -35.5, 182.25, -37.5, 178.75, -34, 175, -30.25, 172.75, -33.75, 168, -35.5, 163.5, -32.75, 158, -29.75, 155, -23.5, 161.5, -17, 173.25, -15, 179.5, -7.25, 133.25, 0.5, 104, 2.5, 93, 4, 90.5, 6.75, 102, 8.25, 111.5, 10.75, 108, 13, 98.5, 14.5, 88.5, 18.5, 99.5, 32.75, 176, 34, 179.25, 41, 163, 45, 160, 48.5, 156.25, 51.25, 160.5, 53.25, 168.75, 53.25, 173.25, 50, 174.5, 53, 179.25, 55.5, 183.75, 51.75, 190.75, 44.5, 190.75, 43.5, 197.75, 46, 230, 48.25, 253, 54.75, 301.25, 57.25, 317.75, 57.75, 327.75, 59.75, 332.75, 71, 334.25, 84, 336.5, 99, 335.75, 102, 332.75, 118, 283.5, 118.25, 253, 115.25, 219.25, 111, 204.75, 107.75, 195.25, 105.5, 187.25, 103.75, 182, 99, 186.5, 97.25, 184.5, 95.75, 175.5, 97.5, 172.75, 98, 168, 93, 165, 91.5, 158.25, 91.5, 155.5, 100.5, 162, 104.5, 169.75, 105.75, 172, 109.75, 138.75, 111.5, 124, 115.25, 97.75, 115.5, 82.75, 116.5, 71.5, 120.5, 76.75, 130.25, 96, 135, 103.75, 134.25, 64, 133.25, 49.75, 127.75, 15, 123.5, -3.75, 115.25, -26.25, 109.5, -43, 101.5, -62.5, 95, -75.5, 91.75, -81.25, 85.75, -77.75, 58, -70.5, 41.5, -71.5, 21.5, -70.5, 6.75, -69.75, -19.75, -69.5, -38, -71.25, -56.5, -74, -69.25, -77.75)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=588775886]
+
+[node name="StatLabel" type="Label" parent="." unique_id=1255600694]
+offset_left = -1366.0
+offset_top = 589.0
+offset_right = -563.0
+offset_bottom = 753.0
+theme_override_font_sizes/font_size = 85
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

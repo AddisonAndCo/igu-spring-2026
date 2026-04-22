@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cih08sfcr80w0"]
+
+[ext_resource type="Texture2D" uid="uid://gpivxitr7hat" path="res://Art for Shop Game/greaves2.png" id="1_uvpd2"]
+
+[sub_resource type="GDScript" id="GDScript_62xa3"]
+script/source = "extends Sprite2D
+var dragging : bool = false
+var locked: bool = false
+var of : Vector2 = Vector2(0,0)
+var home_pos : Vector2
+var small_scale = Vector2(0.4, 0.4)
+var full_scale = Vector2(1.0, 1.0)
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
+@onready var area_2d: Area2D = $Area2D
+@export var stats: Array[String] = []
+@onready var stat_label = $StatLabel
+
+func _ready():
+  home_pos = global_position
+  z_index = 0
+  scale = small_scale
+  stat_label.visible = false
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+  if dragging:
+    position = get_global_mouse_position() - of
+    z_index = 10 # Stays on top while dragging
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+  if locked:
+    return
+  if event is InputEventMouseButton:
+    if event.pressed:
+      scale = full_scale
+      of = get_global_mouse_position() - global_position
+      dragging = true
+      z_index = 100
+      get_viewport().set_input_as_handled() 
+func _input(event: InputEvent) -> void:
+  if event is InputEventMouseButton and not event.pressed:
+    if dragging:
+      dragging = false
+      check_snap()
+
+func check_snap():
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        if global_position.distance_to(zone.global_position) < 180:
+            global_position = zone.global_position
+            if zone.get(\"snap_z_index\") != null:
+                z_index = zone.snap_z_index
+            else:
+                z_index = 2
+            print(\"snapped, stats: \", stats)
+            print(\"label visible: \", stat_label.visible)
+            print(\"label text: \", stat_label.text)    
+            audio_stream_player.play()
+            z_index = 10
+            stat_label.visible = true
+            stat_label.text = \"\\n\".join(stats) # shows on new line
+            return
+    scale = small_scale # If didn't snap, shrink it 
+    global_position = home_pos # Goes back to original position
+    stat_label.visible = false
+"
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1299147019 groups=["clothing"]]
+texture = ExtResource("1_uvpd2")
+script = SubResource("GDScript_62xa3")
+stats = Array[String](["+Electric Resistance"])
+
+[node name="Area2D" type="Area2D" parent="." unique_id=862785606]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1274226432]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-82, 311.25, -83, 312.25, -81.5, 316.5, -80.75, 321, -79.25, 324.75, -79.5, 326.5, -82, 325.25, -82.75, 325, -82.25, 328.25, -81, 338, -81.5, 343.75, -81.25, 346.75, -84, 346.5, -84, 348.25, -81.5, 357, -81.5, 363.75, -81.75, 369.75, -87.25, 379.5, -97.25, 398, -100.25, 403.25, -103.75, 410.5, -104.25, 415, -103.5, 425.75, -101.25, 431.75, -98, 439, -96.25, 442.25, -93.75, 443.75, -81.5, 442, -71.75, 438, -63, 432, -58, 429.25, -44.25, 407.5, -36, 390.25, -30.25, 374.5, -26.75, 363, -38.75, 347.5, -40.25, 343.75, -38.25, 327.5, -37.5, 312.25, -52.75, 314.75, -63.5, 315.75, -76.75, 313.25)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D" unique_id=1052279138]
+polygon = PackedVector2Array(229, 1246, 241, 1254, 281, 1259, 334, 1261, 378, 1255, 409, 1246, 404, 1264, 393, 1297, 406, 1301, 408, 1313, 406, 1346, 399, 1381, 411, 1387, 414, 1386, 403, 1430, 403, 1453, 409, 1484, 429, 1536, 465, 1595, 494, 1639, 493, 1668, 478, 1736, 465, 1774, 444, 1773, 395, 1762, 336, 1727, 307, 1709, 235, 1597, 184, 1452, 190, 1433, 209, 1404, 232, 1389, 235, 1369, 230, 1300)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2129416593]
+
+[node name="StatLabel" type="Label" parent="." unique_id=117018145]
+offset_left = -361.0
+offset_top = 1865.0
+offset_right = 442.0
+offset_bottom = 2029.0
+theme_override_font_sizes/font_size = 100
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
