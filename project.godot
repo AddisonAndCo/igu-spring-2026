@@ -17,8 +17,17 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="igu-spring-2026"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/name="dragndrop"
-run/main_scene="res://dressup.tscn"
+run/main_scene="uid://cmuv8vyxx75w7"
 config/icon="res://icon.svg"
+
+[autoload]
+
+Daymanager="*uid://cyous0yjsv4nl"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [global_group]
 

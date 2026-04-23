@@ -35,7 +35,22 @@ size = Vector2(1002, 464)
 size = Vector2(1248, 2487)
 
 [node name="Main" type="Node2D" unique_id=1906638217]
+process_mode = 3
+position = Vector2(574, 321)
 script = ExtResource("1_b5p66")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=108790410]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3850.0
+offset_top = -2196.18
+offset_right = 3850.0
+offset_bottom = 2203.82
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21230483, 0.21230483, 0.21230483, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Finalize" type="Button" parent="." unique_id=1099132191]
 offset_left = 1820.0
@@ -45,9 +60,9 @@ offset_bottom = 1872.0
 theme_override_fonts/font = ExtResource("4_jmvxp")
 theme_override_font_sizes/font_size = 200
 text = "Done"
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1456954953]
-zoom = Vector2(0.15, 0.15)
 
 [node name="CHARACTERMODEL" type="Sprite2D" parent="." unique_id=378893]
 z_index = 1

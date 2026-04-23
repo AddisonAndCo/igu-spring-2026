@@ -127,7 +127,6 @@ environment = SubResource("Environment_fglfq")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2143028516]
 layer = 10
-follow_viewport_enabled = true
 
 [node name="DressupGame" parent="CanvasLayer2" unique_id=1906638217 instance=ExtResource("5_8jj3j")]
 

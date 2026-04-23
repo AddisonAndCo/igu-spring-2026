@@ -33,16 +33,17 @@ var equipped_stats: Array[String] = []
 
 func check_outfit() -> bool:
     for requirement in customer_requirements:
-        var group = STAT_GROUPS.get(requirement, [requirement])
         var met = false
-        for stat in equipped_stats:
-            if stat in group:
-                met = true
-                break
+        for stat in Daymanager.equipped_stats:
+            # find which group this stat belongs to
+            for group_key in STAT_GROUPS:
+                if stat == group_key or stat in STAT_GROUPS[group_key]:
+                    if requirement == group_key or requirement in STAT_GROUPS[group_key]:
+                        met = true
         if not met:
-            print("Requiements not met!")
-            return false  # a requirement wasn't met
-    return true  # all requirements met
+            print("Requirement not met: ", requirement)
+            return false
+    return true
 
 func reset_day():
     day_results.dressup.outfit = []

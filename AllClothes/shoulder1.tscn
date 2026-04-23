@@ -22,27 +22,30 @@ func _ready():
   scale = small_scale
   stat_label.visible = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _input(event: InputEvent) -> void:
+    if event is InputEventMouseButton:
+        if event.pressed:
+            if locked:
+                return
+            var mouse = get_viewport().get_mouse_position()
+            var local_mouse = to_local(mouse)
+            var rect = get_rect()
+            print(\"mouse: \", mouse, \" local: \", local_mouse, \" rect: \", rect)
+            if rect.has_point(local_mouse):
+                scale = full_scale
+                of = mouse - get_global_transform().origin
+                dragging = true
+                z_index = 100
+        else:
+            if dragging:
+                dragging = false
+                check_snap()
+                
+
 func _process(_delta: float) -> void:
   if dragging:
     position = get_global_mouse_position() - of
     z_index = 10 # Stays on top while dragging
-
-func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-  if locked:
-    return
-  if event is InputEventMouseButton:
-    if event.pressed:
-      scale = full_scale
-      of = get_global_mouse_position() - global_position
-      dragging = true
-      z_index = 100
-      get_viewport().set_input_as_handled() 
-func _input(event: InputEvent) -> void:
-  if event is InputEventMouseButton and not event.pressed:
-    if dragging:
-      dragging = false
-      check_snap()
 
 func check_snap():
     for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
