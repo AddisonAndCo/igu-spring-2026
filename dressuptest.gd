@@ -4,7 +4,6 @@ signal dressup_finished
 var finalized = false
 
 func _ready():
-    visible = false
     process_mode = Node.PROCESS_MODE_ALWAYS
     
 #func _input(event):

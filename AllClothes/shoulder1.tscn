@@ -8,8 +8,8 @@ var dragging : bool = false
 var locked: bool = false
 var of : Vector2 = Vector2(0,0)
 var home_pos : Vector2
-var small_scale = Vector2(0.4, 0.4)
-var full_scale = Vector2(1.0, 1.0)
+var small_scale = Vector2(0.1, 0.1)
+var full_scale = Vector2(0.25, 0.25)
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
 @onready var area_2d: Area2D = $Area2D
@@ -27,15 +27,13 @@ func _input(event: InputEvent) -> void:
         if event.pressed:
             if locked:
                 return
-            var mouse = get_viewport().get_mouse_position()
-            var local_mouse = to_local(mouse)
-            var rect = get_rect()
-            print(\"mouse: \", mouse, \" local: \", local_mouse, \" rect: \", rect)
-            if rect.has_point(local_mouse):
-                scale = full_scale
-                of = mouse - get_global_transform().origin
-                dragging = true
-                z_index = 100
+            var mouse = get_global_mouse_position()
+            print(\"mouse: \", mouse, \" global_pos: \", global_position, \" distance: \", global_position.distance_to(mouse))
+            if global_position.distance_to(mouse) < 150:
+              scale = full_scale
+              of = get_global_mouse_position() - global_position
+              dragging = true
+              z_index = 100
         else:
             if dragging:
                 dragging = false
@@ -43,9 +41,9 @@ func _input(event: InputEvent) -> void:
                 
 
 func _process(_delta: float) -> void:
-  if dragging:
-    position = get_global_mouse_position() - of
-    z_index = 10 # Stays on top while dragging
+    if dragging:
+        position = get_global_mouse_position() - of
+        z_index = 10
 
 func check_snap():
     for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
@@ -69,24 +67,27 @@ func check_snap():
 "
 
 [node name="Sprite2D" type="Sprite2D" unique_id=1018871620 groups=["clothing"]]
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_wdrot")
 script = SubResource("GDScript_62xa3")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1730441218]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=20958888]
+position = Vector2(-29.666645, 911.66675)
 polygon = PackedVector2Array(-355, -1120, -467, -1129, -559, -1120, -625, -1107, -677, -1087, -732, -1071, -774, -1047, -817, -1024, -777, -1016, -720, -995, -708, -981, -753, -971, -797, -941, -846, -917, -854, -905, -790, -893, -774, -886, -813, -878, -856, -872, -894, -852, -923, -837, -869, -842, -810, -838, -741, -828, -666, -810, -613, -796, -545, -769, -499, -741, -455, -718, -434, -702, -405, -777, -375, -862, -361, -915, -351, -959, -343, -1039, -346, -1089)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D" unique_id=1977996428]
+position = Vector2(-29.666645, 911.66675)
 polygon = PackedVector2Array(413, -1117, 446, -1124, 498, -1124, 547, -1126, 601, -1124, 657, -1111, 698, -1099, 738, -1090, 776, -1077, 820, -1054, 865, -1035, 886, -1023, 842, -1015, 797, -999, 774, -982, 788, -976, 836, -958, 888, -933, 916, -914, 903, -903, 865, -895, 840, -889, 900, -876, 947, -860, 981, -843, 914, -843, 841, -832, 772, -826, 702, -809, 633, -787, 575, -755, 521, -727, 495, -711, 445, -864, 415, -951, 409, -1030)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=917959416]
 
 [node name="StatLabel" type="Label" parent="." unique_id=112935335]
-offset_left = 639.0
-offset_top = -1325.0
-offset_right = 1442.0
-offset_bottom = -1161.0
+offset_left = 609.3334
+offset_top = -413.33325
+offset_right = 1412.3334
+offset_bottom = -195.33325
 theme_override_font_sizes/font_size = 100
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

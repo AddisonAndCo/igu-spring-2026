@@ -8,8 +8,8 @@ var dragging : bool = false
 var locked: bool = false
 var of : Vector2 = Vector2(0,0)
 var home_pos : Vector2
-var small_scale = Vector2(0.4, 0.4)
-var full_scale = Vector2(1.0, 1.0)
+var small_scale = Vector2(0.1, 0.1)
+var full_scale = Vector2(0.25, 0.25)
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
 @onready var area_2d: Area2D = $Area2D
@@ -22,27 +22,28 @@ func _ready():
   scale = small_scale
   stat_label.visible = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-  if dragging:
-    position = get_global_mouse_position() - of
-    z_index = 10 # Stays on top while dragging
-
-func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-  if locked:
-    return
-  if event is InputEventMouseButton:
-    if event.pressed:
-      scale = full_scale
-      of = get_global_mouse_position() - global_position
-      dragging = true
-      z_index = 100
-      get_viewport().set_input_as_handled() 
 func _input(event: InputEvent) -> void:
-  if event is InputEventMouseButton and not event.pressed:
+    if event is InputEventMouseButton:
+        if event.pressed:
+            if locked:
+                return
+            var mouse = get_global_mouse_position()
+            print(\"mouse: \", mouse, \" global_pos: \", global_position, \" distance: \", global_position.distance_to(mouse))
+            if global_position.distance_to(mouse) < 150:
+              scale = full_scale
+              of = get_global_mouse_position() - global_position
+              dragging = true
+              z_index = 100
+        else:
+            if dragging:
+                dragging = false
+                check_snap()
+                
+
+func _process(_delta: float) -> void:
     if dragging:
-      dragging = false
-      check_snap()
+        position = get_global_mouse_position() - of
+        z_index = 10
 
 func check_snap():
     for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
@@ -66,12 +67,14 @@ func check_snap():
 "
 
 [node name="Sprite2D" type="Sprite2D" unique_id=531127532 groups=["clothing"]]
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_dqtki")
 script = SubResource("GDScript_62xa3")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=20329081]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=706111630]
+position = Vector2(-40, 766.6666)
 scale = Vector2(4, 4)
 polygon = PackedVector2Array(-25.5, -299.75, -34, -293.25, -46.25, -288.25, -61, -283.5, -83, -278.75, -86.25, -279.75, -81.5, -272, -78.75, -257.75, -78.25, -242, -81.25, -224.5, -85.5, -209.5, -90.25, -191.5, -94.5, -184.75, -86.25, -150, -81.75, -121, -80, -89.5, -75.75, -77.5, -63.75, -76.75, -42.5, -71.5, -17.5, -68.5, -4.25, -69, 35.5, -67.5, 56.25, -70.75, 82, -75.5, 95, -79.75, 99.25, -127.75, 107, -161.75, 112.25, -181.25, 111.5, -190.75, 98, -228.25, 95.75, -253, 98.75, -266, 104.25, -278.75, 91.25, -281.75, 73.5, -285.25, 55.75, -292, 44.25, -299.75)
 
