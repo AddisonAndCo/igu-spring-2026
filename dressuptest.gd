@@ -9,15 +9,9 @@ func _ready():
     $Finalize.disabled = false 
     print("finalize disabled: ", $Finalize.disabled)
     
-#func _input(event):
-    # if event is InputEventMouseButton:
-       # print("dressup received click at: ", event.position)
-       # for piece in get_tree().get_nodes_in_group("clothing"):
-         #   print(piece.name, " position: ", piece.global_position)
-
 func _on_button_pressed():
     finalized = true
-    $Finalize.disabled = true  # Grey out the button
+    #$Finalize.disabled = true  (removing this to prevent softlock)
     lock_all_pieces() # Can't move anymore (redundant)
     collect_stats()
     print("about to check outfit")

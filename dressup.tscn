@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cpgucdku27b1" path="res://dressuptest.gd" id="1_b5p66"]
 [ext_resource type="Texture2D" uid="uid://d2ke2myp6rbwx" path="res://Art for Shop Game/model_male.png" id="1_s3gf1"]
+[ext_resource type="FontFile" uid="uid://movh8dkratit" path="res://Eadui.ttf" id="2_t7nj0"]
 [ext_resource type="PackedScene" uid="uid://ds51p3tqp2iib" path="res://AllClothes/shoulder1.tscn" id="3_7jytk"]
 [ext_resource type="Script" uid="uid://dmslt71vlpme8" path="res://snapindex.gd" id="4_7jluf"]
-[ext_resource type="FontFile" uid="uid://bt361p133in8e" path="res://ASTON SCRIPT.TTF" id="4_jmvxp"]
 [ext_resource type="PackedScene" uid="uid://d15j8kpsv1smr" path="res://AllClothes/shoulder2.tscn" id="5_eqgg3"]
 [ext_resource type="PackedScene" uid="uid://31y2x5d4jajv" path="res://AllClothes/breastplate1.tscn" id="5_oqy0g"]
 [ext_resource type="PackedScene" uid="uid://cmj7j14v788af" path="res://AllClothes/cape1.tscn" id="6_55stl"]
@@ -64,8 +64,8 @@ offset_top = 893.0
 offset_right = 3157.0
 offset_bottom = 1384.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("4_jmvxp")
-theme_override_font_sizes/font_size = 200
+theme_override_fonts/font = ExtResource("2_t7nj0")
+theme_override_font_sizes/font_size = 425
 text = "Done"
 metadata/_edit_use_anchors_ = true
 

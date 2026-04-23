@@ -18,14 +18,11 @@ var in_minigame = false
 
 func _ready():
     dressup.visible = false
-    print("dressup visible: ", dressup.visible)
-    print("in_minigame: ", in_minigame)
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     dressup_trigger.clicked.connect(_on_dressup_clicked)
     dressup.dressup_finished.connect(_on_dressup_closed)
     
 func _on_dressup_clicked():
-    print("dressup clicked called!!!")
     in_minigame = true
     dressup_layer.visible = true
     dressup.visible = true
@@ -37,7 +34,6 @@ func _on_dressup_clicked():
         highlighted_object = null
     
 func _on_dressup_closed():
-    print("dressup closed recieved")
     dressup_layer.visible = false
     dressup.visible = false
     in_minigame = false
