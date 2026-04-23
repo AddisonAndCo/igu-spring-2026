@@ -222,7 +222,7 @@ stats = Array[String](["+Electric Resistance"])
 item_type = "\"legs\""
 
 [node name="pants2" parent="." unique_id=1605968673 instance=ExtResource("13_m148i")]
-position = Vector2(121, 596)
+position = Vector2(148, 605)
 script = ExtResource("6_t7nj0")
 item_type = "\"legs\""
 

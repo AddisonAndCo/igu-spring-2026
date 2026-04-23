@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bbxo2ygwoxy17" path="res://character_body_3d.gd" id="1_ksu1u"]
 [ext_resource type="PackedScene" uid="uid://bp6v7rlbnuqu3" path="res://shop.glb" id="1_r66bj"]
+[ext_resource type="Texture2D" uid="uid://yljxjuijg3th" path="res://Art for Shop Game/Characters/male1.png" id="1_xofcu"]
 [ext_resource type="Script" uid="uid://dwfac73a7s42h" path="res://lantern_light.gd" id="2_un2pc"]
+[ext_resource type="Texture2D" uid="uid://bf6kx2hc7nv0q" path="res://Art for Shop Game/Characters/female2.png" id="2_vipva"]
 [ext_resource type="Script" uid="uid://c34uudxsew5ld" path="res://selecthighlight.gd" id="3_b5jwv"]
 [ext_resource type="Material" uid="uid://b71mrpu3ctwfs" path="res://outline_material.tres" id="4_p1ib0"]
 [ext_resource type="PackedScene" uid="uid://ddeje4in068a" path="res://dressup.tscn" id="5_8jj3j"]
@@ -31,6 +33,15 @@ background_mode = 2
 sky = SubResource("Sky_1ydrn")
 
 [node name="main3d" type="Node3D" unique_id=191004607]
+
+[node name="male1" type="Sprite3D" parent="." unique_id=758989959]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.084891796, 1.1484364, -0.79036003)
+visible = false
+texture = ExtResource("1_xofcu")
+
+[node name="fem1" type="Sprite3D" parent="." unique_id=372117252]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.084891796, 1.1865746, -0.79036003)
+texture = ExtResource("2_vipva")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=653682531]
 script = ExtResource("1_ksu1u")
@@ -127,6 +138,7 @@ environment = SubResource("Environment_fglfq")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2143028516]
 layer = 10
+visible = false
 follow_viewport_enabled = true
 
 [node name="DressupGame" parent="CanvasLayer2" unique_id=1906638217 instance=ExtResource("5_8jj3j")]

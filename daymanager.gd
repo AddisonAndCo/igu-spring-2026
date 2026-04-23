@@ -1,9 +1,7 @@
 extends Node
 
-var customer_requirements: Array[String] = ["icy", "insulted", "venomous"] # 1 day cycle, static for now
+var customer_requirements: Array[String] = ["icy", "insulated", "venomous"] # 1 day cycle, static for now
 var equipped_stats: Array[String] = [] # What the player equipped
-var passed = Daymanager.check_outfit()
-
 var day_results = {
     "dressup": {
         "outfit": []  # list of what they equipped
@@ -27,7 +25,6 @@ const STAT_GROUPS = {
     "+Wind Resistance": ["windy", "high altitude", "high altitudes"],
     "+Water Resistance": ["wet", "underwater"],
 }
-
 
 func check_outfit() -> bool:
     for requirement in customer_requirements:

@@ -8,7 +8,7 @@ const GRAVITY = 9.8
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var ray = $Head/Camera3D/RayCast3D
-@onready var dressup_layer =get_node("/root/main3d/CanvasLayer2")
+@onready var dressup_layer = get_node("/root/main3d/CanvasLayer2")
 @onready var dressup = get_node("/root/main3d/CanvasLayer2/DressupGame")
 @onready var dressup_trigger = get_node("/root/main3d/shop/Old Lantern")
 
@@ -17,6 +17,7 @@ var in_minigame = false
 # var outline_material = preload("res://outline.tres")
 
 func _ready():
+    dressup.visible = false
     print("dressup visible: ", dressup.visible)
     print("in_minigame: ", in_minigame)
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -33,6 +34,7 @@ func _on_dressup_clicked():
         highlighted_object = null
     
 func _on_dressup_closed():
+    print("dressup closed recieved")
     dressup_layer.visible = false
     dressup.visible = false
     in_minigame = false

@@ -5,6 +5,9 @@ var finalized = false
 
 func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
+    finalized = false
+    $Finalize.disabled = false 
+    print("finalize disabled: ", $Finalize.disabled)
     
 #func _input(event):
     # if event is InputEventMouseButton:
@@ -15,10 +18,13 @@ func _ready():
 func _on_button_pressed():
     finalized = true
     $Finalize.disabled = true  # Grey out the button
-    lock_all_pieces()
+    lock_all_pieces() # Can't move anymore (redundant)
     collect_stats()
-    visible = false
+    print("about to check outfit")
+    Daymanager.check_outfit()
+    print("button pressed, emitting signal")
     emit_signal("dressup_finished")
+    visible = false
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     # re-enable player movement
     
