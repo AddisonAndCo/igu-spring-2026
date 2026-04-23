@@ -1,6 +1,6 @@
 extends Node
 
-var customer_requirements: Array[String] = ["icy", "insulated", "venomous"] # 1 day cycle, static for now
+var customer_requirements: Array[String] = ["+Fire Resistance", "+Poison Resistance", "+Cold Resistance", "+Electric Resistance", "+Wind Resistance", "+Water Resistance"] # 1 day cycle, static for now
 var equipped_stats: Array[String] = [] # What the player equipped
 var day_results = {
     "dressup": {
@@ -16,15 +16,29 @@ var day_results = {
     }
 }
 
+const DIALOGUE_TEMPLATES = [
+  "Hello, shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and it also needs to deal with {req1} conditions.",
+  "Dear shopkeeper, I am in need of some armour to protect me from somewhere {req0}. Oh, and also protect me from {req1} dangers."
+  ]
+
 # The synonym groups word is treated as same stat
 const STAT_GROUPS = {
-    "+Fire Resistance": ["volcanic", "hot"],
-    "+Poison Resistance": ["poisonous", "toxic", "venomous"],
-    "+Cold Resistance": ["icy", "frozen"],
-    "+Electric Resistance": ["insulated", "shocking", "electric", "sparkling"],
-    "+Wind Resistance": ["windy", "high altitude", "high altitudes"],
-    "+Water Resistance": ["wet", "underwater"],
-}
+    "+Fire Resistance": ["volcanic", "hot", "desert", "boiling", "burning", "blistering", "sweltering"],
+    "+Poison Resistance": ["poisonous", "toxic", "venomous", "noxious", "infected"],
+    "+Cold Resistance": ["icy", "arctic", "tundra", "freezing", "chilly", "frigid"],
+    "+Electric Resistance": ["electrified", "charged", "electrostatic", "energized"],
+    "+Wind Resistance": ["windy", "breezy", "gusty"],
+    "+Water Resistance": ["wet", "underwater", "sodden", "damp", "waterlogged", "marshy"],
+    }
+
+func get_customer_dialogue() -> String:
+    var keys = STAT_GROUPS.keys()
+    keys.shuffle()
+    var word1 = STAT_GROUPS[keys[0]][randi() % STAT_GROUPS[keys[0]].size()]
+    var word2 = STAT_GROUPS[keys[1]][randi() % STAT_GROUPS[keys[1]].size()]
+    
+    var template = DIALOGUE_TEMPLATES[randi() % DIALOGUE_TEMPLATES.size()]
+    return template.replace("{req0}", word1).replace("{req1}", word2)
 
 func check_outfit() -> bool:
     for requirement in customer_requirements:

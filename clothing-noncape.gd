@@ -28,7 +28,6 @@ func _input(event: InputEvent) -> void:
                 of = mouse - global_position
                 dragging = true
                 z_index = 100
-                #get_viewport().set_input_as_handled() 
         else:
             if dragging:
                 dragging = false

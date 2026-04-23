@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bbxo2ygwoxy17" path="res://character_body_3d.gd" id="1_ksu1u"]
 [ext_resource type="PackedScene" uid="uid://bp6v7rlbnuqu3" path="res://shop.glb" id="1_r66bj"]
-[ext_resource type="Texture2D" uid="uid://yljxjuijg3th" path="res://Art for Shop Game/Characters/male1.png" id="1_xofcu"]
+[ext_resource type="Texture2D" uid="uid://yljxjuijg3th" path="res://Characters/male1.png" id="1_xofcu"]
 [ext_resource type="Script" uid="uid://dwfac73a7s42h" path="res://lantern_light.gd" id="2_un2pc"]
-[ext_resource type="Texture2D" uid="uid://bf6kx2hc7nv0q" path="res://Art for Shop Game/Characters/female2.png" id="2_vipva"]
+[ext_resource type="Texture2D" uid="uid://bf6kx2hc7nv0q" path="res://Characters/female2.png" id="2_vipva"]
 [ext_resource type="Script" uid="uid://c34uudxsew5ld" path="res://selecthighlight.gd" id="3_b5jwv"]
 [ext_resource type="Material" uid="uid://b71mrpu3ctwfs" path="res://outline_material.tres" id="4_p1ib0"]
 [ext_resource type="PackedScene" uid="uid://ddeje4in068a" path="res://dressup.tscn" id="5_8jj3j"]
+[ext_resource type="Script" uid="uid://cueoniin7b6yu" path="res://order.gd" id="9_et6uk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egb7q"]
 
@@ -158,5 +159,12 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "•"
+
+[node name="OrderBubble" type="Sprite3D" parent="." unique_id=795510244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.656, 2.035, -0.79)
+script = ExtResource("9_et6uk")
+
+[node name="Label3D" type="Label3D" parent="OrderBubble" unique_id=1247165045]
+width = 200.0
 
 [editable path="shop"]
