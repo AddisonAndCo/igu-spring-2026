@@ -8,10 +8,10 @@ script = ExtResource("1_ws7jt")
 element = 1
 
 [node name="debug_counter" type="RichTextLabel" parent="." unique_id=1963998139]
-offset_left = 5.0
-offset_top = 605.0
-offset_right = 178.0
-offset_bottom = 645.0
+offset_left = 37.0
+offset_top = 572.0
+offset_right = 210.0
+offset_bottom = 612.0
 theme = ExtResource("2_x0on0")
 scroll_active = false
 

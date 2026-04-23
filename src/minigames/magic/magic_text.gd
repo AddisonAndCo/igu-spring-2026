@@ -9,11 +9,15 @@ var index: int = 0
 @export var letter_spacing: float = 2.0
 @export var word_spacing: float = 18.0
 @export var line_scroll_duration: float = 0.18
+@export var wrong_flash_color: Color = Color(1.0, 0.45, 0.45)
+@export var wrong_flash_duration: float = 0.16
+@export var wrong_shake_distance: float = 14.0
 
 var characters: Array[MagicCharacter] = []
 var character_line_indices: Array[int] = []
 var line_centers: Array[float] = []
 var scroll_tween: Tween
+var wrong_feedback_tween: Tween
 
 @onready var characters_layer: Control = $CharactersLayer
 
@@ -38,7 +42,27 @@ func try_advance(i: String) -> bool:
 		_update_scroll_position()
 		return true
 
-	return false
+	play_wrong_feedback()
+	return false;
+
+
+func play_wrong_feedback() -> void:
+	if !is_node_ready():
+		return
+
+	if wrong_feedback_tween != null:
+		wrong_feedback_tween.kill()
+
+	characters_layer.position.x = 0.0
+	characters_layer.modulate = Color.WHITE
+
+	wrong_feedback_tween = create_tween()
+	wrong_feedback_tween.parallel().tween_property(characters_layer, "modulate", wrong_flash_color, wrong_flash_duration * 0.5)
+	wrong_feedback_tween.parallel().tween_property(characters_layer, "position:x", wrong_shake_distance, wrong_flash_duration * 0.2)
+	wrong_feedback_tween.tween_property(characters_layer, "position:x", -wrong_shake_distance, wrong_flash_duration * 0.25)
+	wrong_feedback_tween.tween_property(characters_layer, "position:x", wrong_shake_distance * 0.6, wrong_flash_duration * 0.2)
+	wrong_feedback_tween.parallel().tween_property(characters_layer, "modulate", Color.WHITE, wrong_flash_duration)
+	wrong_feedback_tween.tween_property(characters_layer, "position:x", 0.0, wrong_flash_duration * 0.35)
 
 
 func _layout_text() -> void:
@@ -67,7 +91,7 @@ func _layout_text() -> void:
 	for line_index in range(line_layouts.size()):
 		var line_layout: Dictionary = line_layouts[line_index]
 		var line_width := float(line_layout["width"])
-		var line_x = maxf((available_width - line_width) * 0.5, 0.0)
+		var line_x = horizontal_margin + maxf((available_width - line_width) * 0.5, 0.0)
 		var line_y = start_y + (line_index * line_height_value)
 		line_centers.append(line_y + (line_height_value * 0.5))
 

@@ -56,14 +56,14 @@ func _ready() -> void:
 	mt = MagicText.new_magic_text(bank)
 	add_child(mt)
 
-	$debug_counter.text = "idx: {0}".format([mt.index])
+	_update_timer_display()
 	wpm = 0
 	mt.connect("word_complete", _on_word_complete)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	_update_timer_display()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -84,11 +84,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if input.length() != 1:
 		return
 
-	if (mt.try_advance(input)):
-		$debug_counter.text = "idx: {0}".format([mt.index])
-	else:
-		wrong_key_pressed.emit()
-
+	mt.try_advance(input)
 
 func _on_word_complete() -> void:
 	wpm += 1
@@ -96,8 +92,21 @@ func _on_word_complete() -> void:
 
 func _on_timeout():
 	wpm = wpm * (60.0 / $Timer.wait_time)
-	$debug_counter.text = "wpm: {0}".format([wpm])
+	_update_timer_display()
 	set_process_unhandled_key_input(false)
+
+
+func _update_timer_display() -> void:
+	var remaining_seconds: int
+
+	if !timer_started_once:
+		remaining_seconds = int(ceil($Timer.wait_time))
+	elif $Timer.is_stopped():
+		remaining_seconds = 0
+	else:
+		remaining_seconds = int(ceil($Timer.time_left))
+
+	$debug_counter.text = str(remaining_seconds)
 
 
 # Factory function

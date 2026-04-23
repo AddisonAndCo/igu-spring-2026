@@ -14,6 +14,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.976471, 0.937255, 0.6, 0.55)
 
+[node name="HitParticles" type="Control" parent="." unique_id=591036531]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1113931773]
 layout_mode = 0
 offset_right = 40.0
