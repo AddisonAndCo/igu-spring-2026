@@ -7,31 +7,16 @@
 script = ExtResource("1_ws7jt")
 element = 1
 
-[node name="complete_words" type="RichTextLabel" parent="." unique_id=1326420247]
-offset_right = 1146.0
-offset_bottom = 647.0
-theme = ExtResource("2_x0on0")
-autowrap_mode = 2
-autowrap_trim_flags = 0
-shortcut_keys_enabled = false
-
-[node name="incomplete_words" type="RichTextLabel" parent="." unique_id=48889754]
-offset_right = 1146.0
-offset_bottom = 647.0
-theme = ExtResource("2_x0on0")
-autowrap_mode = 2
-autowrap_trim_flags = 0
-shortcut_keys_enabled = false
-
 [node name="debug_counter" type="RichTextLabel" parent="." unique_id=1963998139]
 offset_left = 5.0
 offset_top = 605.0
 offset_right = 178.0
 offset_bottom = 645.0
 theme = ExtResource("2_x0on0")
+scroll_active = false
 
 [node name="Timer" type="Timer" parent="." unique_id=1193600752]
-wait_time = 10.0
+wait_time = 15.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
