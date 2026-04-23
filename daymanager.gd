@@ -1,5 +1,9 @@
 extends Node
 
+var customer_requirements: Array[String] = ["icy", "insulted", "venomous"] # 1 day cycle, static for now
+var equipped_stats: Array[String] = [] # What the player equipped
+var passed = Daymanager.check_outfit()
+
 var day_results = {
     "dressup": {
         "outfit": []  # list of what they equipped
@@ -22,14 +26,8 @@ const STAT_GROUPS = {
     "+Electric Resistance": ["insulated", "shocking", "electric", "sparkling"],
     "+Wind Resistance": ["windy", "high altitude", "high altitudes"],
     "+Water Resistance": ["wet", "underwater"],
-    # add more groups as needed
 }
 
-# What the current customer requires (set this per day/customer)
-var customer_requirements: Array[String] = ["icy", "insulated", "venomous"]
-
-# What the player equipped
-var equipped_stats: Array[String] = []
 
 func check_outfit() -> bool:
     for requirement in customer_requirements:
@@ -41,10 +39,11 @@ func check_outfit() -> bool:
                     if requirement == group_key or requirement in STAT_GROUPS[group_key]:
                         met = true
         if not met:
-            print("Requirement not met: ", requirement)
+            print("Requirement not met, customer dead: ", requirement) #Temp newspaper
             return false
+    print("Customer happy and successful!")
     return true
-
+  
 func reset_day():
     day_results.dressup.outfit = []
     day_results.blacksmith.passed = false

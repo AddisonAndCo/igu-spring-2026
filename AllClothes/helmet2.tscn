@@ -10,58 +10,51 @@ var of : Vector2 = Vector2(0,0)
 var home_pos : Vector2
 var small_scale = Vector2(0.1, 0.1)
 var full_scale = Vector2(0.25, 0.25)
-
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer # Optional click noise
-@onready var area_2d: Area2D = $Area2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @export var stats: Array[String] = []
 @onready var stat_label = $StatLabel
 
 func _ready():
-  home_pos = global_position
-  z_index = 0
-  scale = small_scale
-  stat_label.visible = false
+    home_pos = global_position
+    z_index = 0
+    scale = small_scale
+    stat_label.visible = false
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
         if event.pressed:
             if locked:
                 return
-            var mouse = get_viewport().get_mouse_position()
+            var mouse = get_global_mouse_position()
             if global_position.distance_to(mouse) < 50:
                 scale = full_scale
-                of = mouse - get_global_transform().origin
+                of = mouse - global_position
                 dragging = true
                 z_index = 100
+                get_viewport().set_input_as_handled() 
         else:
             if dragging:
                 dragging = false
                 check_snap()
-                
 
 func _process(_delta: float) -> void:
-  if dragging:
-    position = get_global_mouse_position() - of
-    z_index = 10 # Stays on top while dragging
+    if dragging:
+        position = get_global_mouse_position() - of
+        z_index = 10
 
 func check_snap():
     for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        print(\"zone: \", zone.name, \" runtime pos: \", zone.global_position)
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
         if global_position.distance_to(zone.global_position) < 180:
             global_position = zone.global_position
-            if zone.get(\"snap_z_index\") != null:
-                z_index = zone.snap_z_index
-            else:
-                z_index = 2
-            print(\"snapped, stats: \", stats)
-            print(\"label visible: \", stat_label.visible)
-            print(\"label text: \", stat_label.text)    
-            audio_stream_player.play()
             z_index = 10
+            audio_stream_player.play()
             stat_label.visible = true
-            stat_label.text = \"\\n\".join(stats) # shows on new line
+            stat_label.text = \"\\n\".join(stats)
             return
-    scale = small_scale # If didn't snap, shrink it 
-    global_position = home_pos # Goes back to original position
+    scale = small_scale
+    global_position = home_pos
     stat_label.visible = false
 "
 
@@ -78,10 +71,9 @@ polygon = PackedVector2Array(0, -78, -5.5, -77.5, -13, -76.25, -15, -69.5, -27, 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1831340018]
 
 [node name="StatLabel" type="Label" parent="." unique_id=566422371]
-offset_left = 423.0
-offset_top = -335.0
-offset_right = 1226.0
-offset_bottom = -117.0
+offset_left = 534.0
+offset_top = -218.0
+offset_right = 1337.0
 theme_override_font_sizes/font_size = 100
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

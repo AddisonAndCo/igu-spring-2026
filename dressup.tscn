@@ -3,36 +3,43 @@
 [ext_resource type="Script" uid="uid://cpgucdku27b1" path="res://dressuptest.gd" id="1_b5p66"]
 [ext_resource type="Texture2D" uid="uid://d2ke2myp6rbwx" path="res://Art for Shop Game/model_male.png" id="1_s3gf1"]
 [ext_resource type="PackedScene" uid="uid://ds51p3tqp2iib" path="res://AllClothes/shoulder1.tscn" id="3_7jytk"]
+[ext_resource type="Script" uid="uid://dmslt71vlpme8" path="res://snapindex.gd" id="4_7jluf"]
 [ext_resource type="FontFile" uid="uid://bt361p133in8e" path="res://ASTON SCRIPT.TTF" id="4_jmvxp"]
 [ext_resource type="PackedScene" uid="uid://d15j8kpsv1smr" path="res://AllClothes/shoulder2.tscn" id="5_eqgg3"]
 [ext_resource type="PackedScene" uid="uid://31y2x5d4jajv" path="res://AllClothes/breastplate1.tscn" id="5_oqy0g"]
 [ext_resource type="PackedScene" uid="uid://cmj7j14v788af" path="res://AllClothes/cape1.tscn" id="6_55stl"]
+[ext_resource type="Script" uid="uid://78qehnrh3dxn" path="res://clothing-noncape.gd" id="6_t7nj0"]
 [ext_resource type="PackedScene" uid="uid://dkwmbmfs1gvhq" path="res://AllClothes/greaves1.tscn" id="7_56gbh"]
 [ext_resource type="PackedScene" uid="uid://chdo4frnjeq0x" path="res://AllClothes/helmet1.tscn" id="8_vpeps"]
 [ext_resource type="PackedScene" uid="uid://d3iyel3xkgtcd" path="res://AllClothes/helmet2.tscn" id="9_tqxck"]
 [ext_resource type="PackedScene" uid="uid://ds1xluyypa2ld" path="res://AllClothes/helmet3.tscn" id="10_hefvw"]
+[ext_resource type="Script" uid="uid://dq00212lter81" path="res://clothing-cape.gd" id="10_v641g"]
 [ext_resource type="PackedScene" uid="uid://cvhbc455qu8pj" path="res://AllClothes/pants1.tscn" id="11_bes58"]
 [ext_resource type="PackedScene" uid="uid://jd1a8ioykj7l" path="res://AllClothes/cape2.tscn" id="12_vosqe"]
 [ext_resource type="PackedScene" uid="uid://ca14vlnltgy5s" path="res://AllClothes/pants2.tscn" id="13_m148i"]
 [ext_resource type="PackedScene" uid="uid://cih08sfcr80w0" path="res://AllClothes/greaves2.tscn" id="14_m6n5c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_elv6t"]
-radius = 332.074
+radius = 76.41989
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63pyf"]
-size = Vector2(854.125, 921.25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eic7x"]
-size = Vector2(854.125, 1541)
+size = Vector2(246.0625, 267.3125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wkst8"]
-size = Vector2(1908.25, 536.5)
+size = Vector2(384, 130)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdj4j"]
-size = Vector2(1002, 464)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t7nj0"]
+radius = 48.0
+height = 114.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gctra"]
-size = Vector2(1248, 2487)
+size = Vector2(311, 322)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eic7x"]
+size = Vector2(251, 357)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdj4j"]
+size = Vector2(309.5, 100.625)
 
 [node name="Main" type="Node2D" unique_id=1906638217]
 process_mode = 3
@@ -42,10 +49,10 @@ script = ExtResource("1_b5p66")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -3850.0
-offset_top = -2196.18
-offset_right = 3850.0
-offset_bottom = 2203.82
+offset_left = -3918.0
+offset_top = -2202.0
+offset_right = 3782.0
+offset_bottom = 2198.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.21230483, 0.21230483, 0.21230483, 1)
@@ -72,103 +79,151 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_s3gf1")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=656251141]
-position = Vector2(1000, 571)
-scale = Vector2(0.25, 0.25)
 
 [node name="helmet" type="Area2D" parent="Node2D" unique_id=1269796429 groups=["snap_zones"]]
+z_index = 1
+position = Vector2(1009, 178)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"helmet\""])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/helmet" unique_id=2041265043]
-position = Vector2(27, -1527)
 shape = SubResource("CircleShape2D_elv6t")
 
 [node name="breastplate" type="Area2D" parent="Node2D" unique_id=1987278580 groups=["snap_zones"]]
+z_index = 1
+position = Vector2(1008, 384)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"breastplate\""])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/breastplate" unique_id=405716705]
-position = Vector2(34, -675.625)
 shape = SubResource("RectangleShape2D_63pyf")
 debug_color = Color(0.943643, 5.48691e-06, 0.600689, 0.42)
 
-[node name="legs" type="Area2D" parent="Node2D" unique_id=1916797932 groups=["snap_zones"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/legs" unique_id=2118633982]
-position = Vector2(32.9375, 575.5)
-shape = SubResource("RectangleShape2D_eic7x")
-debug_color = Color(0.424798, 0.459852, 1, 0.42)
-
 [node name="shoulder" type="Area2D" parent="Node2D" unique_id=248276522 groups=["snap_zones"]]
+z_index = 2
+position = Vector2(1007, 343)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"shoulder\""])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/shoulder" unique_id=233594794]
-position = Vector2(15.875, -888.75)
 shape = SubResource("RectangleShape2D_wkst8")
 debug_color = Color(0.34902, 0.796078, 0.176471, 0.419608)
 
-[node name="feet" type="Area2D" parent="Node2D" unique_id=599319040 groups=["snap_zones"]]
+[node name="justoneshoulder" type="Area2D" parent="Node2D" unique_id=1247154546 groups=["snap_zones"]]
+z_index = 2
+position = Vector2(1114, 343)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"shoulder2\""])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/feet" unique_id=568395985]
-position = Vector2(46, 1571)
-shape = SubResource("RectangleShape2D_xdj4j")
-debug_color = Color(0.894273, 0.319941, 0.00590661, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/justoneshoulder" unique_id=1320047080]
+shape = SubResource("CapsuleShape2D_t7nj0")
 
 [node name="cape" type="Area2D" parent="Node2D" unique_id=372780914 groups=["snap_zones"]]
+position = Vector2(1009, 618)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"cape\""])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/cape" unique_id=768919291]
-position = Vector2(22, 63.5)
 shape = SubResource("RectangleShape2D_gctra")
 debug_color = Color(0.472276, 0.589849, 0, 0.42)
 
+[node name="legs" type="Area2D" parent="Node2D" unique_id=1916797932 groups=["snap_zones"]]
+z_index = 2
+position = Vector2(1007, 720)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"legs\""])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/legs" unique_id=2118633982]
+shape = SubResource("RectangleShape2D_eic7x")
+debug_color = Color(0.424798, 0.459852, 1, 0.42)
+
+[node name="feet" type="Area2D" parent="Node2D" unique_id=599319040 groups=["snap_zones"]]
+z_index = 2
+position = Vector2(1010, 961)
+script = ExtResource("4_7jluf")
+accepted_items = Array[String](["\"feet\""])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/feet" unique_id=568395985]
+shape = SubResource("RectangleShape2D_xdj4j")
+debug_color = Color(0.894273, 0.319941, 0.00590661, 0.42)
+
 [node name="shoulder1" parent="." unique_id=957346370 instance=ExtResource("3_7jytk")]
 z_index = 2
-position = Vector2(675, 240)
+position = Vector2(625, 277)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Wind Resistance"])
+item_type = "\"shoulder\""
 
 [node name="shoulder2" parent="." unique_id=1150457886 instance=ExtResource("5_eqgg3")]
-position = Vector2(535, 418)
+position = Vector2(821.00006, 91)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])
+item_type = "\"shoulder2\""
 
 [node name="breastplate1" parent="." unique_id=78077236 instance=ExtResource("5_oqy0g")]
 z_index = 2
-position = Vector2(426, 131)
+position = Vector2(364, 101.00001)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Cold Resistance"])
+item_type = "\"breastplate\""
 
 [node name="cape1" parent="." unique_id=479386519 instance=ExtResource("6_55stl")]
-position = Vector2(144, 245)
+position = Vector2(147, 225.00002)
+script = ExtResource("10_v641g")
 stats = Array[String](["+Wind Resistance"])
+item_type = "\"cape\""
 
 [node name="cape2" parent="." unique_id=1963095339 instance=ExtResource("12_vosqe")]
-position = Vector2(384, 759)
+position = Vector2(396, 802.00006)
+script = ExtResource("10_v641g")
 stats = Array[String](["+Water Resistance"])
+item_type = "\"cape\""
 
 [node name="greaves1" parent="." unique_id=793588251 instance=ExtResource("7_56gbh")]
 z_index = 2
-position = Vector2(416, 35)
+position = Vector2(607, 104)
 scale = Vector2(0.15, 0.15)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Cold Resistance"])
+item_type = "\"feet\""
 
 [node name="greaves2" parent="." unique_id=1299147019 instance=ExtResource("14_m6n5c")]
-position = Vector2(589, 486)
+position = Vector2(369, 507)
+script = ExtResource("6_t7nj0")
+item_type = "\"feet\""
 
 [node name="helmet1" parent="." unique_id=520407690 instance=ExtResource("8_vpeps")]
 z_index = 2
-position = Vector2(125, 1170)
+position = Vector2(131, 890)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])
+item_type = "\"helmet\""
 
 [node name="helmet2" parent="." unique_id=1542652533 instance=ExtResource("9_tqxck")]
 z_index = 2
-position = Vector2(434, 690)
+position = Vector2(381, 301)
 scale = Vector2(0.15, 0.15)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Water Resistance"])
+item_type = "\"helmet\""
 
 [node name="helmet3" parent="." unique_id=843832829 instance=ExtResource("10_hefvw")]
 z_index = 2
-position = Vector2(640, 796)
+position = Vector2(602, 583)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Fire Resistance"])
+item_type = "\"helmet\""
 
 [node name="pants1" parent="." unique_id=974052682 instance=ExtResource("11_bes58")]
 z_index = 2
-position = Vector2(600, 821)
+position = Vector2(688, 864)
+script = ExtResource("6_t7nj0")
 stats = Array[String](["+Electric Resistance"])
+item_type = "\"legs\""
 
 [node name="pants2" parent="." unique_id=1605968673 instance=ExtResource("13_m148i")]
-position = Vector2(125, 616)
+position = Vector2(121, 596)
+script = ExtResource("6_t7nj0")
+item_type = "\"legs\""
 
 [connection signal="pressed" from="Finalize" to="." method="_on_button_pressed"]

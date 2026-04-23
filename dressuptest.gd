@@ -31,6 +31,6 @@ func collect_stats():
     print("Equipped stats: ", all_stats)  # debug
 
 func lock_all_pieces():
-    print(get_tree().get_nodes_in_group("clothing").size())
+    # print(get_tree().get_nodes_in_group("clothing").size())
     for piece in get_tree().get_nodes_in_group("clothing"):
         piece.set("locked", true)
