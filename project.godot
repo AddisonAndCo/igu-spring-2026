@@ -36,8 +36,7 @@ snap_zones=""
 
 [gui]
 
-theme/custom_font="res://ASTON SCRIPT.TTF"
-
+theme/custom_font="uid://movh8dkratit"
 
 [file_customization]
 

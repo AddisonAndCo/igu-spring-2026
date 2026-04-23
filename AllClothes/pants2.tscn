@@ -78,6 +78,6 @@ offset_left = 766.66675
 offset_top = -533.3333
 offset_right = 1569.6667
 offset_bottom = -315.3333
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 200
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

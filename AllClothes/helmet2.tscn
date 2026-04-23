@@ -74,6 +74,6 @@ polygon = PackedVector2Array(0, -78, -5.5, -77.5, -13, -76.25, -15, -69.5, -27, 
 offset_left = 534.0
 offset_top = -218.0
 offset_right = 1337.0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 200
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

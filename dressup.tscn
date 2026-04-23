@@ -155,6 +155,7 @@ stats = Array[String](["+Wind Resistance"])
 item_type = "\"shoulder\""
 
 [node name="shoulder2" parent="." unique_id=1150457886 instance=ExtResource("5_eqgg3")]
+z_index = 2
 position = Vector2(821.00006, 91)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])

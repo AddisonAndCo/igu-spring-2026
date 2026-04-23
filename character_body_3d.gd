@@ -25,9 +25,12 @@ func _ready():
     dressup.dressup_finished.connect(_on_dressup_closed)
     
 func _on_dressup_clicked():
+    print("dressup clicked called!!!")
     in_minigame = true
     dressup_layer.visible = true
     dressup.visible = true
+    print("layer visible: ", dressup_layer.visible)
+    print("dressup visible: ", dressup.visible)
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     if highlighted_object:
         highlighted_object.on_hover_exit()
@@ -41,24 +44,22 @@ func _on_dressup_closed():
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     
 func _process(_delta):
-    var hit = ray.get_collider()
-    
-    var hover_object = null
-    if hit:
-     # print(hit.get_path())
+  if in_minigame:
+    return
+  var hit = ray.get_collider()
+  var hover_object = null
+  if hit:
       var parent = hit.get_parent() # MeshInstance3D
       if parent:
             var grandparent = parent.get_parent() # Node3D
             if grandparent and grandparent.has_method("on_hover_enter"):
-                hover_object = grandparent
+              hover_object = grandparent
     
-    if hover_object != highlighted_object:
+  if hover_object != highlighted_object:
         if highlighted_object and highlighted_object.has_method("on_hover_exit"):
             highlighted_object.on_hover_exit()
-        
         if hover_object:
             hover_object.on_hover_enter()
-        
         highlighted_object = hover_object
 
 func _input(event):
@@ -71,6 +72,7 @@ func _input(event):
         head.rotation.x = clamp(new_x, deg_to_rad(-60), deg_to_rad(60))
         head.rotation.y = clamp(new_y, deg_to_rad(-120), deg_to_rad(120))
     if event is InputEventMouseButton and event.pressed:
+        print("mouse clicked, in_minigame: ", in_minigame, " highlighted: ", highlighted_object)
         if highlighted_object:
             highlighted_object.emit_signal("clicked")
             get_viewport().set_input_as_handled()
