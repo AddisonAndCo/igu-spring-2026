@@ -8,7 +8,9 @@
 [ext_resource type="Script" uid="uid://c34uudxsew5ld" path="res://selecthighlight.gd" id="3_b5jwv"]
 [ext_resource type="Material" uid="uid://b71mrpu3ctwfs" path="res://outline_material.tres" id="4_p1ib0"]
 [ext_resource type="PackedScene" uid="uid://ddeje4in068a" path="res://dressup.tscn" id="5_8jj3j"]
+[ext_resource type="PackedScene" uid="uid://dt7tc557psshg" path="res://chandelier.glb" id="8_xjxh8"]
 [ext_resource type="Script" uid="uid://cueoniin7b6yu" path="res://order.gd" id="9_et6uk"]
+[ext_resource type="PackedScene" uid="uid://dj4gbqi0ts68i" path="res://outside.glb" id="10_wi601"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egb7q"]
 
@@ -137,6 +139,12 @@ script = ExtResource("2_un2pc")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=252679009]
 environment = SubResource("Environment_fglfq")
 
+[node name="chandelier" parent="." unique_id=1797187570 instance=ExtResource("8_xjxh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.232151, 0)
+
+[node name="Torus" parent="chandelier" index="0" unique_id=564481061]
+transform = Transform3D(0.79998994, -0.00200266, -0.00012820604, 0.00400339, 0.39998618, -0.0024580215, 0.00030380124, 0.0026565935, 0.3699918, 0, 0, 0)
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2143028516]
 layer = 10
 visible = false
@@ -167,4 +175,24 @@ script = ExtResource("9_et6uk")
 [node name="Label3D" type="Label3D" parent="OrderBubble" unique_id=1247165045]
 width = 200.0
 
+[node name="outside" parent="OrderBubble" unique_id=104239417 instance=ExtResource("10_wi601")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -2.167017, 7.476403)
+
+[node name="St_Augustine-grass" parent="OrderBubble/outside" index="0" unique_id=324119803]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -2.6265037)
+
+[node name="Wall" parent="OrderBubble/outside" index="6" unique_id=1175924086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.391244, 0, -9.789347)
+
+[node name="Retopo_3DModel" parent="OrderBubble/outside/Wall" index="0" unique_id=984888659]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 0, 3.0738702)
+
+[node name="Retopo_3DModel_001" parent="OrderBubble/outside/Wall" index="1" unique_id=16249651]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 5.137594, 3.0738702)
+
+[node name="Retopo_3DModel_002" parent="OrderBubble/outside/Wall" index="2" unique_id=1018111377]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 9.938862, 3.0738702)
+
 [editable path="shop"]
+[editable path="chandelier"]
+[editable path="OrderBubble/outside"]
