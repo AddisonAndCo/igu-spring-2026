@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://xqd8l8i5qcqm"]
+
+[ext_resource type="Script" uid="uid://dg2pi2tqnx01l" path="res://src/minigames/magic/magic_character.gd" id="1_a3rhk"]
+
+[node name="MagicCharacter" type="Control" unique_id=1761294652]
+layout_mode = 0
+script = ExtResource("1_a3rhk")
+
+[node name="CurrentHighlight" type="ColorRect" parent="." unique_id=1575031641]
+visible = false
+layout_mode = 0
+offset_top = 32.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.976471, 0.937255, 0.6, 0.55)
+
+[node name="HitParticles" type="Control" parent="." unique_id=591036531]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1113931773]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scroll_active = false
+fit_content = true

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cl10u7632wdrs"]
+
+[ext_resource type="Script" uid="uid://bvhvd0f1xk1jh" path="res://src/minigames/magic/magic_game.gd" id="1_ws7jt"]
+[ext_resource type="Theme" uid="uid://d3tdne58j6fg2" path="res://assets/minigames/magic/magic_text.tres" id="2_x0on0"]
+
+[node name="MagicGame" type="Node2D" unique_id=1107811993]
+script = ExtResource("1_ws7jt")
+element = 1
+
+[node name="debug_counter" type="RichTextLabel" parent="." unique_id=1963998139]
+offset_left = 37.0
+offset_top = 572.0
+offset_right = 210.0
+offset_bottom = 612.0
+theme = ExtResource("2_x0on0")
+scroll_active = false
+
+[node name="Timer" type="Timer" parent="." unique_id=1193600752]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]

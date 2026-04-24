@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://d3tdne58j6fg2"]
+
+[ext_resource type="FontFile" uid="uid://bxs5deh6ex0qs" path="res://assets/fonts/eadui/Eadui.ttf" id="1_kk3n8"]
+
+[resource]
+default_font = ExtResource("1_kk3n8")
+default_font_size = 50
