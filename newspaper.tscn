@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cagr8motlcf8a"]
+
+[ext_resource type="Script" uid="uid://day5wocjurnmm" path="res://newspaper.gd" id="1_reqrk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reqrk"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="Newspaper" type="Control" unique_id=2102639229]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_reqrk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=804353168]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.99999994, 0.92928493, 0.6937979, 1)
+
+[node name="Headline" type="Label" parent="." unique_id=149952010]
+layout_mode = 0
+offset_top = 212.0
+offset_right = 1919.0
+offset_bottom = 397.0
+text = "Adventu"
+
+[node name="Fluff" type="Label" parent="." unique_id=2051127422]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 227.0
+offset_right = 324.0
+offset_bottom = 1056.0
+
+[node name="Fluff2" type="Label" parent="." unique_id=1834530022]
+layout_mode = 0
+offset_left = 1582.0
+offset_top = 170.0
+offset_right = 1893.0
+offset_bottom = 1062.0
+
+[node name="MainArticle" type="RichTextLabel" parent="." unique_id=1602461180]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 185.0
+offset_right = 1615.0
+offset_bottom = 1025.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_reqrk")
+
+[node name="NextDay" type="Button" parent="." unique_id=47156506]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

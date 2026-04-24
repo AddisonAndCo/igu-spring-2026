@@ -14,13 +14,11 @@ func _on_button_pressed():
     #$Finalize.disabled = true  (removing this to prevent softlock)
     lock_all_pieces() # Can't move anymore (redundant)
     collect_stats()
-    print("about to check outfit")
+    Daymanager.complete_minigame("dressup")
     Daymanager.check_outfit()
-    print("button pressed, emitting signal")
     emit_signal("dressup_finished")
     visible = false
-    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-    # re-enable player movement
+    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # re-enable player movement
     
 func collect_stats():
     var all_stats: Array[String] = []

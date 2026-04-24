@@ -19,6 +19,7 @@ func _ready():
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     dressup_trigger.clicked.connect(_on_dressup_clicked)
     dressup.dressup_finished.connect(_on_dressup_closed)
+    Daymanager.day_complete.connect(_on_day_complete)
 
 func _on_dressup_clicked():
     in_minigame = true
@@ -68,6 +69,9 @@ func _input(event):
             get_viewport().set_input_as_handled()
     if event.is_action_pressed("ui_cancel"):
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        
+func _on_day_complete():
+  get_tree().change_scene_to_file("res://newspaper.tscn")
 
 func _physics_process(delta):
     if not is_on_floor():
