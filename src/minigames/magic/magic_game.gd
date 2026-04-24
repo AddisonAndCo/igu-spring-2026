@@ -20,12 +20,12 @@ class_name MagicGame extends Node
 # enable keyboard inputs to control cursor
 # set timer and scoring stuff
 
-signal wrong_key_pressed
 signal magic_game_complete(magic_element: String, passed_threshold: bool)
 
 static var bank_root = "res://assets/minigames/magic/"
 const SUCCESS_THRESHOLD: int = 50 #wpm
 
+var el
 var wpm: int = 0
 var timer_started_once: bool = false
 
@@ -33,8 +33,8 @@ var mt: MagicText
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var e_str = str(MagicElement.Type.keys()[element]).to_lower()
-	var path = bank_root + e_str + ".yaml"
+	el = str(MagicElement.Type.keys()[element]).to_lower()
+	var path = bank_root + el + ".yaml"
 	var parser = YAMLParser.new()
 
 	var yfile = FileAccess.open(path, FileAccess.READ)
@@ -94,6 +94,7 @@ func _on_timeout():
 	wpm = wpm * (60.0 / $Timer.wait_time)
 	_update_timer_display()
 	set_process_unhandled_key_input(false)
+	magic_game_complete.emit(el, wpm > 40)
 
 
 func _update_timer_display() -> void:

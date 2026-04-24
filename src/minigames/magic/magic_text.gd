@@ -12,6 +12,7 @@ var index: int = 0
 @export var wrong_flash_color: Color = Color(1.0, 0.45, 0.45)
 @export var wrong_flash_duration: float = 0.16
 @export var wrong_shake_distance: float = 14.0
+@export var correct_key_sfx: AudioStream
 
 var characters: Array[MagicCharacter] = []
 var character_line_indices: Array[int] = []
@@ -20,6 +21,7 @@ var scroll_tween: Tween
 var wrong_feedback_tween: Tween
 
 @onready var characters_layer: Control = $CharactersLayer
+@onready var correct_key_player: AudioStreamPlayer = $CorrectKeyPlayer
 
 signal word_complete
 
@@ -34,6 +36,7 @@ func try_advance(i: String) -> bool:
 
 	if bank[index] == i:
 		characters[index].play_correct_feedback()
+		_play_correct_key_sfx()
 		if (bank[index] == " "):
 			word_complete.emit()
 		index += 1
@@ -63,6 +66,14 @@ func play_wrong_feedback() -> void:
 	wrong_feedback_tween.tween_property(characters_layer, "position:x", wrong_shake_distance * 0.6, wrong_flash_duration * 0.2)
 	wrong_feedback_tween.parallel().tween_property(characters_layer, "modulate", Color.WHITE, wrong_flash_duration)
 	wrong_feedback_tween.tween_property(characters_layer, "position:x", 0.0, wrong_flash_duration * 0.35)
+
+
+func _play_correct_key_sfx() -> void:
+	if correct_key_sfx == null:
+		return
+
+	correct_key_player.stream = correct_key_sfx
+	correct_key_player.play()
 
 
 func _layout_text() -> void:
