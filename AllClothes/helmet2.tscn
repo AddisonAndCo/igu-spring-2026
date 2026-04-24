@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://d3iyel3xkgtcd"]
+
+[ext_resource type="Texture2D" uid="uid://cp28f4jglmdtm" path="res://Art for Shop Game/helmet2.png" id="1_no1qv"]
+
+[sub_resource type="GDScript" id="GDScript_62xa3"]
+script/source = "extends Sprite2D
+var dragging : bool = false
+var locked: bool = false
+var of : Vector2 = Vector2(0,0)
+var home_pos : Vector2
+var small_scale = Vector2(0.1, 0.1)
+var full_scale = Vector2(0.25, 0.25)
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@export var stats: Array[String] = []
+@onready var stat_label = $StatLabel
+
+func _ready():
+    home_pos = global_position
+    z_index = 0
+    scale = small_scale
+    stat_label.visible = false
+
+func _input(event: InputEvent) -> void:
+    if event is InputEventMouseButton:
+        if event.pressed:
+            if locked:
+                return
+            var mouse = get_global_mouse_position()
+            if global_position.distance_to(mouse) < 50:
+                scale = full_scale
+                of = mouse - global_position
+                dragging = true
+                z_index = 100
+                get_viewport().set_input_as_handled() 
+        else:
+            if dragging:
+                dragging = false
+                check_snap()
+
+func _process(_delta: float) -> void:
+    if dragging:
+        position = get_global_mouse_position() - of
+        z_index = 10
+
+func check_snap():
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        print(\"zone: \", zone.name, \" runtime pos: \", zone.global_position)
+    for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        if global_position.distance_to(zone.global_position) < 180:
+            global_position = zone.global_position
+            z_index = 10
+            audio_stream_player.play()
+            stat_label.visible = true
+            stat_label.text = \"\\n\".join(stats)
+            return
+    scale = small_scale
+    global_position = home_pos
+    stat_label.visible = false
+"
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1117781863 groups=["clothing"]]
+texture = ExtResource("1_no1qv")
+script = SubResource("GDScript_62xa3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2115549759]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1730054982]
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(0, -78, -5.5, -77.5, -13, -76.25, -15, -69.5, -27, -69.25, -36, -64.5, -37.5, -71.5, -40.5, -70.25, -51.25, -62.5, -62.25, -45.5, -67.75, -32.75, -74.5, -18.25, -76.25, -12.25, -75.75, 3.75, -75.5, 21.75, -69.75, 40, -63, 58, -53, 60.5, -35.25, 67.75, -19.25, 75.5, -6.5, 84, 1.25, 88.75, 8, 83.75, 26.75, 75, 46.25, 63.5, 66.25, 53.25, 74.5, 41.25, 77, 30, 79.5, 12, 76.25, -13.5, 71.5, -29.75, 66.25, -42.75, 59, -55.25, 52, -64, 41, -70.75, 39.5, -65.25, 29.25, -69.75, 19.5, -69.75, 16.75, -74.75, 9.5, -77)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1831340018]
+
+[node name="StatLabel" type="Label" parent="." unique_id=566422371]
+offset_left = 534.0
+offset_top = -218.0
+offset_right = 1337.0
+theme_override_font_sizes/font_size = 200
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

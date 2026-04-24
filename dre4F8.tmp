@@ -1,0 +1,167 @@
+[gd_scene load_steps=19 format=3 uid="uid://ddeje4in068a"]
+
+[ext_resource type="Script" path="res://dressuptest.gd" id="1_7arfy"]
+[ext_resource type="Texture2D" uid="uid://d2ke2myp6rbwx" path="res://Art for Shop Game/model_male.png" id="1_s3gf1"]
+[ext_resource type="FontFile" uid="uid://bt361p133in8e" path="res://ASTON SCRIPT.TTF" id="2_jwl3s"]
+[ext_resource type="PackedScene" uid="uid://ds51p3tqp2iib" path="res://AllClothes/shoulder1.tscn" id="3_7jytk"]
+[ext_resource type="PackedScene" uid="uid://cvhbc455qu8pj" path="res://AllClothes/pants1.tscn" id="5_vbo0l"]
+[ext_resource type="PackedScene" uid="uid://31y2x5d4jajv" path="res://AllClothes/breastplate1.tscn" id="6_u3jq6"]
+[ext_resource type="PackedScene" uid="uid://chdo4frnjeq0x" path="res://AllClothes/helmet1.tscn" id="7_d6loi"]
+[ext_resource type="PackedScene" uid="uid://cmj7j14v788af" path="res://AllClothes/cape1.tscn" id="8_ty6b4"]
+[ext_resource type="PackedScene" uid="uid://d3iyel3xkgtcd" path="res://AllClothes/helmet2.tscn" id="8_vewwk"]
+[ext_resource type="PackedScene" uid="uid://dkwmbmfs1gvhq" path="res://AllClothes/greaves1.tscn" id="9_2mo5a"]
+[ext_resource type="PackedScene" uid="uid://ds1xluyypa2ld" path="res://AllClothes/helmet3.tscn" id="9_prjpu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pwsc"]
+size = Vector2(1947, 442)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nqki"]
+size = Vector2(831, 1364)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qaq6p"]
+size = Vector2(645, 611)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv4nq"]
+size = Vector2(645, 1133)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hl7xc"]
+size = Vector2(1239.5, 2164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pymra"]
+size = Vector2(959, 528)
+
+[sub_resource type="GDScript" id="GDScript_62xa3"]
+script/source = "extends Sprite2D
+var dragging : bool = false
+var locked: bool = false
+var of : Vector2 = Vector2(0,0)
+var home_pos : Vector2
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var area_2d: Area2D = $Area2D
+
+func _ready():
+  home_pos = global_position
+  z_index = 0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+  if dragging:
+    position = get_global_mouse_position() - of
+    z_index = 10 # Stays on top while dragging
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+  if locked:
+    return
+  if event is InputEventMouseButton:
+    if event.pressed:
+      dragging = true
+      of = get_global_mouse_position() - global_position
+    else:
+      dragging = false
+      check_snap()
+
+func check_snap():
+  for zone in get_tree().get_nodes_in_group(\"snap_zones\"):
+        if global_position.distance_to(zone.global_position) < 180:
+            global_position = zone.global_position
+            if zone.get(\"snap_z_index\") != null:
+              z_index = zone.snap_z_index 
+            else:
+              z_index = 2 #debug fallback z index
+            audio_stream_player.play()
+            return
+"
+
+[node name="dressup1" type="Node2D"]
+script = ExtResource("1_7arfy")
+
+[node name="Finalize" type="Button" parent="."]
+offset_left = 2022.0
+offset_top = 1524.0
+offset_right = 3474.0
+offset_bottom = 1967.0
+theme_override_fonts/font = ExtResource("2_jwl3s")
+theme_override_font_sizes/font_size = 200
+text = "Done"
+
+[node name="CHARACTERMODEL" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_s3gf1")
+
+[node name="Area2D" type="Area2D" parent="CHARACTERMODEL" groups=["snap_zones"]]
+
+[node name="CollisionShoulders" type="CollisionShape2D" parent="CHARACTERMODEL/Area2D"]
+position = Vector2(31.5, -919)
+shape = SubResource("RectangleShape2D_8pwsc")
+debug_color = Color(0.556433, 0.403284, 0.988488, 0.42)
+
+[node name="Area2D2" type="Area2D" parent="CHARACTERMODEL" groups=["snap_zones"]]
+
+[node name="CollisionPants" type="CollisionShape2D" parent="CHARACTERMODEL/Area2D2"]
+position = Vector2(34.5, 670)
+shape = SubResource("RectangleShape2D_3nqki")
+debug_color = Color(0.845226, 0.378225, 0, 0.42)
+
+[node name="Area2D3" type="Area2D" parent="CHARACTERMODEL" groups=["snap_zones"]]
+
+[node name="CollisionHelmet" type="CollisionShape2D" parent="CHARACTERMODEL/Area2D3"]
+position = Vector2(35.5, -1543)
+shape = SubResource("RectangleShape2D_qaq6p")
+debug_color = Color(0.981063, 0, 0.37432, 0.42)
+
+[node name="Area2D4" type="Area2D" parent="CHARACTERMODEL" groups=["snap_zones"]]
+
+[node name="CollisionBreastplate" type="CollisionShape2D" parent="CHARACTERMODEL/Area2D4"]
+position = Vector2(28, -605.5)
+shape = SubResource("RectangleShape2D_sv4nq")
+
+[node name="Area2D5" type="Area2D" parent="CHARACTERMODEL" groups=["snap_zones"]]
+
+[node name="CollisionCape" type="CollisionShape2D" parent="CHARACTERMODEL/Area2D5"]
+position = Vector2(42, -56)
+shape = SubResource("RectangleShape2D_hl7xc")
+debug_color = Color(0.562492, 0.558513, 0.051478, 0.42)
+
+[node name="Area2D6" type="Area2D" parent="CHARACTERMODEL" groups=["snap_zones"]]
+
+[node name="CollisionFeet" type="CollisionShape2D" parent="CHARACTERMODEL/Area2D6"]
+position = Vector2(42.5, 1528)
+shape = SubResource("RectangleShape2D_pymra")
+debug_color = Color(0, 0.638792, 0.373799, 0.42)
+
+[node name="Shoulders1Sprite" parent="." instance=ExtResource("3_7jytk")]
+z_index = 2
+position = Vector2(2632, -765)
+script = SubResource("GDScript_62xa3")
+
+[node name="Pants1Sprite" parent="." instance=ExtResource("5_vbo0l")]
+z_index = 2
+position = Vector2(-3207, 722)
+
+[node name="Breastplate1Sprite" parent="." instance=ExtResource("6_u3jq6")]
+z_index = 2
+position = Vector2(-1729, -828)
+
+[node name="Helmet1Sprite" parent="." instance=ExtResource("7_d6loi")]
+z_index = 2
+position = Vector2(3357, 2640)
+
+[node name="Helmet2Sprite" parent="." instance=ExtResource("8_vewwk")]
+z_index = 2
+position = Vector2(2347, 1789)
+
+[node name="Helmet3Sprite" parent="." instance=ExtResource("9_prjpu")]
+z_index = 2
+position = Vector2(3134, 763)
+
+[node name="Cape1Sprite" parent="." instance=ExtResource("8_ty6b4")]
+position = Vector2(-1741, 534)
+
+[node name="Greaves1Sprite" parent="." instance=ExtResource("9_2mo5a")]
+position = Vector2(-3020, -3129)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.15, 0.15)
+
+[connection signal="pressed" from="Finalize" to="." method="_on_button_pressed"]
