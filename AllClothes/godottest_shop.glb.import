@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cpqe3iuxj03y6"
-valid=false
+path="res://.godot/imported/godottest_shop.glb-c800dbc77588349b0864f47677583638.scn"
 
 [deps]
 
 source_file="res://AllClothes/godottest_shop.glb"
+dest_files=["res://.godot/imported/godottest_shop.glb-c800dbc77588349b0864f47677583638.scn"]
 
 [params]
 
