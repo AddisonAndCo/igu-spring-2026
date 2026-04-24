@@ -28,7 +28,7 @@ var minigames_completed = {
 }
 signal day_complete
 
-func _ready(): # TEMP JUST FOR TEST REMOVE LATER !!!!
+func _ready(): # TEMP JUST FOR TEST REMOVE LATER !!!! 
     minigames_completed["blacksmith"] = true
     minigames_completed["typing"] = true
 
@@ -53,7 +53,7 @@ func check_day_complete():
 const DIALOGUE_TEMPLATES = [
     "Hello, Shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and it also needs to deal with {req1} conditions.",
     "Dear Shopkeeper, I am in need of some armour to protect me from somewhere {req0}. Oh, and also protect me from {req1} dangers.",
-    "Well met, Shopkeeper. "]
+    "Well met, Shopkeeper. I require some of your finest armour to protect me from someplace {req0} and also be properly equipped for {req1} conditions."]
 
 # The synonym groups word is treated as same stat
 const STAT_GROUPS = {

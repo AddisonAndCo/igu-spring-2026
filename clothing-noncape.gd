@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 
 func check_snap():
     for zone in get_tree().get_nodes_in_group("snap_zones"):
-        if global_position.distance_to(zone.global_position) < 180:
+        if global_position.distance_to(zone.global_position) < 100:
             if item_type in zone.accepted_items:
                 global_position = zone.global_position
                 z_index = 10

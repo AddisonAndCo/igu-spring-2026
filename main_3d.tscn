@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ddeje4in068a" path="res://dressup.tscn" id="5_8jj3j"]
 [ext_resource type="PackedScene" uid="uid://dt7tc557psshg" path="res://chandelier.glb" id="8_xjxh8"]
 [ext_resource type="Script" uid="uid://cueoniin7b6yu" path="res://order.gd" id="9_et6uk"]
+[ext_resource type="Texture2D" uid="uid://c01bf7jf1wc1y" path="res://Art for Shop Game/speech2.png" id="10_238tj"]
 [ext_resource type="PackedScene" uid="uid://dj4gbqi0ts68i" path="res://outside.glb" id="10_wi601"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egb7q"]
@@ -35,6 +36,12 @@ sky_material = SubResource("ProceduralSkyMaterial_xanij")
 background_mode = 2
 sky = SubResource("Sky_1ydrn")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xjxh8"]
+viewport_path = NodePath("SpeechBubbleRoot/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_238tj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="main3d" type="Node3D" unique_id=191004607]
 
 [node name="male1" type="Sprite3D" parent="." unique_id=758989959]
@@ -43,7 +50,7 @@ visible = false
 texture = ExtResource("1_xofcu")
 
 [node name="fem1" type="Sprite3D" parent="." unique_id=372117252]
-transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.084891796, 1.1865746, -0.79036003)
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.084891796, 1.2615596, -0.79036003)
 texture = ExtResource("2_vipva")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=653682531]
@@ -64,12 +71,12 @@ collision_mask = 2
 
 [node name="shop" parent="." unique_id=157018700 instance=ExtResource("1_r66bj")]
 
-[node name="Book_Tome" parent="shop" index="1" unique_id=2090431289 node_paths=PackedStringArray("mesh")]
+[node name="Book_Tome" parent="shop" index="1" unique_id=1547952168 node_paths=PackedStringArray("mesh")]
 script = ExtResource("3_b5jwv")
 mesh = NodePath("Cube_025")
 outline_material = ExtResource("4_p1ib0")
 
-[node name="Cube_025" parent="shop/Book_Tome" index="0" unique_id=38887575]
+[node name="Cube_025" parent="shop/Book_Tome" index="0" unique_id=96583531]
 layers = 2
 
 [node name="StaticBody3D" type="StaticBody3D" parent="shop/Book_Tome/Cube_025" index="0" unique_id=61594590]
@@ -79,36 +86,36 @@ collision_layer = 2
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -1.4901161e-08, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_8jj3j")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="shop/Floor" parent_id_path=PackedInt32Array(157018700, 890740432) index="0" unique_id=11143376]
+[node name="StaticBody3D" type="StaticBody3D" parent="shop/Floor" parent_id_path=PackedInt32Array(157018700, 467526672) index="0" unique_id=11143376]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/Floor/StaticBody3D" unique_id=34448512]
 transform = Transform3D(6.375, 0, 0, 0, 0.619668, 0, 0, 0, 6.375, -0.0363808, -0.210058, -0.014226)
 shape = SubResource("BoxShape3D_f1c4m")
 
-[node name="Blacksmith Hammer" parent="shop" index="30" unique_id=1346889894 node_paths=PackedStringArray("mesh")]
+[node name="Blacksmith Hammer" parent="shop" index="30" unique_id=609520283 node_paths=PackedStringArray("mesh")]
 script = ExtResource("3_b5jwv")
 mesh = NodePath("BlacksmithHammer01_l")
 outline_material = ExtResource("4_p1ib0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="shop/Blacksmith Hammer/BlacksmithHammer01_l" parent_id_path=PackedInt32Array(157018700, 1888618425) index="0" unique_id=205836833]
+[node name="StaticBody3D" type="StaticBody3D" parent="shop/Blacksmith Hammer/BlacksmithHammer01_l" parent_id_path=PackedInt32Array(157018700, 1985587066) index="0" unique_id=205836833]
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/Blacksmith Hammer/BlacksmithHammer01_l/StaticBody3D" unique_id=646484460]
 shape = SubResource("ConcavePolygonShape3D_fp0x7")
 
-[node name="Old Lantern" parent="shop" index="33" unique_id=1984060370 node_paths=PackedStringArray("mesh")]
+[node name="Old Lantern" parent="shop" index="33" unique_id=380361090 node_paths=PackedStringArray("mesh")]
 script = ExtResource("3_b5jwv")
 mesh = NodePath("Cylinder_007")
 outline_material = ExtResource("4_p1ib0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="shop/Old Lantern/Cylinder_007" parent_id_path=PackedInt32Array(157018700, 1867328081) index="0" unique_id=1310008963]
+[node name="StaticBody3D" type="StaticBody3D" parent="shop/Old Lantern/Cylinder_007" parent_id_path=PackedInt32Array(157018700, 545243726) index="0" unique_id=1310008963]
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/Old Lantern/Cylinder_007/StaticBody3D" unique_id=1884811168]
 shape = SubResource("ConcavePolygonShape3D_2wc1w")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1056865139]
-transform = Transform3D(0.999966, -0.00738586, 0.00354465, 0.00130674, 0.570936, 0.820994, -0.00808752, -0.820962, 0.570926, 0, 13.3648, 10.3626)
+transform = Transform3D(0.99996644, -0.0073858583, 0.0035446724, 0.0013067406, 0.5709357, 0.8209937, -0.008087523, -0.8209616, 0.57092625, 0, 24.802818, 15.280455)
 light_color = Color(1, 0.960784, 0.878431, 1)
 light_energy = 2.0
 light_angular_distance = 18.27
@@ -142,8 +149,15 @@ environment = SubResource("Environment_fglfq")
 [node name="chandelier" parent="." unique_id=1797187570 instance=ExtResource("8_xjxh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.232151, 0)
 
-[node name="Torus" parent="chandelier" index="0" unique_id=40470502]
+[node name="Torus" parent="chandelier" index="0" unique_id=564481061]
 transform = Transform3D(0.79998994, -0.00200266, -0.00012820604, 0.00400339, 0.39998618, -0.0024580215, 0.00030380124, 0.0026565935, 0.3699918, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="chandelier/Chandelier" parent_id_path=PackedInt32Array(1797187570, 638113317) index="24" unique_id=881827562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.84785795, 0)
+light_color = Color(0.94951016, 0.7537912, 0.5011241, 1)
+light_energy = 2.0
+light_size = 1.0
+script = ExtResource("2_un2pc")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2143028516]
 layer = 10
@@ -168,31 +182,73 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "•"
 
-[node name="OrderBubble" type="Sprite3D" parent="." unique_id=795510244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.656, 2.035, -0.79)
-script = ExtResource("9_et6uk")
+[node name="outside" parent="." unique_id=104239417 instance=ExtResource("10_wi601")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.656, -0.1320169, 6.6864033)
 
-[node name="Label3D" type="Label3D" parent="OrderBubble" unique_id=1247165045]
-width = 200.0
-
-[node name="outside" parent="OrderBubble" unique_id=104239417 instance=ExtResource("10_wi601")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -2.167017, 7.476403)
-
-[node name="St_Augustine-grass" parent="OrderBubble/outside" index="0" unique_id=62194947]
+[node name="St_Augustine-grass" parent="outside" index="0" unique_id=324119803]
 transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -2.6265037)
 
-[node name="Wall" parent="OrderBubble/outside" index="6" unique_id=1256388388]
+[node name="Wall" parent="outside" index="6" unique_id=1175924086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.391244, 0, -9.789347)
 
-[node name="Retopo_3DModel" parent="OrderBubble/outside/Wall" index="0" unique_id=359837488]
+[node name="Retopo_3DModel" parent="outside/Wall" index="0" unique_id=984888659]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 0, 3.0738702)
 
-[node name="Retopo_3DModel_001" parent="OrderBubble/outside/Wall" index="1" unique_id=1264562510]
+[node name="Retopo_3DModel_001" parent="outside/Wall" index="1" unique_id=16249651]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 5.137594, 3.0738702)
 
-[node name="Retopo_3DModel_002" parent="OrderBubble/outside/Wall" index="2" unique_id=1995607563]
+[node name="Retopo_3DModel_002" parent="outside/Wall" index="2" unique_id=1018111377]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 9.938862, 3.0738702)
+
+[node name="SpeechBubbleRoot" type="Node3D" parent="." unique_id=1072704619]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.4323769, 2.9957526, -0.79)
+script = ExtResource("9_et6uk")
+
+[node name="subText" type="Sprite3D" parent="SpeechBubbleRoot" unique_id=795510244]
+transform = Transform3D(2.92, 0, 0, 0, 1.93, 0, 0, 0, 2.18, 0, 0, 0.01)
+texture = SubResource("ViewportTexture_xjxh8")
+
+[node name="OrderBubble" type="Sprite3D" parent="SpeechBubbleRoot" unique_id=482653289]
+flip_h = true
+texture = ExtResource("10_238tj")
+
+[node name="SubViewport" type="SubViewport" parent="SpeechBubbleRoot" unique_id=1660589530]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SpeechBubbleRoot/SubViewport" unique_id=1897388740]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="SpeechBubbleRoot/SubViewport/Control" unique_id=1453474493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_238tj")
+
+[node name="MarginContainer" type="MarginContainer" parent="SpeechBubbleRoot/SubViewport/Control/PanelContainer" unique_id=917610631]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SpeechBubbleRoot/SubViewport/Control/PanelContainer/MarginContainer" unique_id=1609722919]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 45
+fit_content = true
+autowrap_mode = 2
+vertical_alignment = 1
 
 [editable path="shop"]
 [editable path="chandelier"]
-[editable path="OrderBubble/outside"]
+[editable path="outside"]

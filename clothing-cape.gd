@@ -23,7 +23,7 @@ func _input(event: InputEvent) -> void:
             if locked:
                 return
             var mouse = get_global_mouse_position()
-            if global_position.distance_to(mouse) < 180:
+            if global_position.distance_to(mouse) < 100:
                 scale = full_scale
                 of = mouse - global_position
                 dragging = true

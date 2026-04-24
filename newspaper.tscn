@@ -1,57 +1,106 @@
 [gd_scene format=3 uid="uid://cagr8motlcf8a"]
 
 [ext_resource type="Script" uid="uid://day5wocjurnmm" path="res://newspaper.gd" id="1_reqrk"]
+[ext_resource type="Texture2D" uid="uid://dd1xxgitpe7vw" path="res://newspaper_bg.png" id="2_8sy2j"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reqrk"]
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tcvqs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sy2j"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 
 [node name="Newspaper" type="Control" unique_id=2102639229]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_reqrk")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=804353168]
+visible = false
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.99999994, 0.92928493, 0.6937979, 1)
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2109507195]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_8sy2j")
+
 [node name="Headline" type="Label" parent="." unique_id=149952010]
 layout_mode = 0
-offset_top = 212.0
+offset_top = 132.0
 offset_right = 1919.0
-offset_bottom = 397.0
-text = "Adventu"
+offset_bottom = 317.0
+theme_override_colors/font_color = Color(0.33032322, 0.16183686, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 138
+theme_override_styles/focus = SubResource("StyleBoxLine_tcvqs")
+text = "The Fate of Our Brave Adventurer"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Fluff" type="Label" parent="." unique_id=2051127422]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 201.0
-offset_right = 324.0
-offset_bottom = 1056.0
+offset_left = 120.0
+offset_top = 270.0
+offset_right = 326.0
+offset_bottom = 890.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis dolor dui. Ut et eros lacus. Praesent nec eros at mauris ultrices maximus. Interdum et maesuada fames ac ante ipsum primis in faucibus."
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Fluff2" type="Label" parent="." unique_id=1834530022]
 layout_mode = 0
-offset_left = 1591.0
-offset_top = 180.0
-offset_right = 1902.0
-offset_bottom = 1060.0
+offset_left = 1573.0
+offset_top = 281.0
+offset_right = 1839.0
+offset_bottom = 878.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Nam varius, mauris at venenatis pulvinar, augue dolor tincidunt sem, sed auctor erat dui nec justo. Integer ullamcorper tempus felis quis molestie. Cras gravida velit justo, ac imperdiet ipsum commodo. Nam eleifend, justo non posuere cursus, neque dui blandit odio, non consect ligula mi nec."
+autowrap_mode = 2
 
-[node name="MainArticle" type="RichTextLabel" parent="." unique_id=1602461180]
-layout_mode = 0
-offset_left = 285.0
-offset_top = 185.0
-offset_right = 1615.0
-offset_bottom = 1025.0
-theme_override_styles/focus = SubResource("StyleBoxFlat_reqrk")
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2131508684]
+layout_mode = 1
+offset_left = 333.0
+offset_top = 281.0
+offset_right = 1567.0
+offset_bottom = 854.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="MainArticle" type="RichTextLabel" parent="MarginContainer" unique_id=1602461180]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxFlat_8sy2j")
 
 [node name="NextDay" type="Button" parent="." unique_id=47156506]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 812.0
+offset_top = 864.0
+offset_right = 1113.0
+offset_bottom = 968.0
+theme_override_font_sizes/font_size = 75
+text = "Next Day"
+icon_alignment = 1

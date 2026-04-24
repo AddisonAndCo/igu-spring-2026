@@ -49,10 +49,10 @@ script = ExtResource("1_b5p66")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -3918.0
-offset_top = -2202.0
-offset_right = 3782.0
-offset_bottom = 2198.0
+offset_left = -4121.0
+offset_top = -1936.0
+offset_right = 3579.0
+offset_bottom = 2464.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.21230483, 0.21230483, 0.21230483, 1)
@@ -149,21 +149,21 @@ debug_color = Color(0.894273, 0.319941, 0.00590661, 0.42)
 
 [node name="shoulder1" parent="." unique_id=957346370 instance=ExtResource("3_7jytk")]
 z_index = 2
-position = Vector2(625, 277)
+position = Vector2(1764.0001, 67)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Wind Resistance"])
 item_type = "\"shoulder\""
 
 [node name="shoulder2" parent="." unique_id=1150457886 instance=ExtResource("5_eqgg3")]
 z_index = 2
-position = Vector2(821.00006, 91)
+position = Vector2(444.00003, 85)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])
 item_type = "\"shoulder2\""
 
 [node name="breastplate1" parent="." unique_id=78077236 instance=ExtResource("5_oqy0g")]
 z_index = 2
-position = Vector2(364, 101.00001)
+position = Vector2(1449, 186)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Cold Resistance"])
 item_type = "\"breastplate\""
@@ -175,14 +175,14 @@ stats = Array[String](["+Wind Resistance"])
 item_type = "\"cape\""
 
 [node name="cape2" parent="." unique_id=1963095339 instance=ExtResource("12_vosqe")]
-position = Vector2(396, 802.00006)
+position = Vector2(410.00003, 835)
 script = ExtResource("10_v641g")
 stats = Array[String](["+Water Resistance"])
 item_type = "\"cape\""
 
 [node name="greaves1" parent="." unique_id=793588251 instance=ExtResource("7_56gbh")]
 z_index = 2
-position = Vector2(607, 104)
+position = Vector2(1769, 399.00003)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Cold Resistance"])
@@ -195,7 +195,7 @@ item_type = "\"feet\""
 
 [node name="helmet1" parent="." unique_id=520407690 instance=ExtResource("8_vpeps")]
 z_index = 2
-position = Vector2(131, 890)
+position = Vector2(131, 914)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])
 item_type = "\"helmet\""
@@ -210,14 +210,14 @@ item_type = "\"helmet\""
 
 [node name="helmet3" parent="." unique_id=843832829 instance=ExtResource("10_hefvw")]
 z_index = 2
-position = Vector2(602, 583)
+position = Vector2(1519, 565)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Fire Resistance"])
 item_type = "\"helmet\""
 
 [node name="pants1" parent="." unique_id=974052682 instance=ExtResource("11_bes58")]
 z_index = 2
-position = Vector2(688, 864)
+position = Vector2(1761, 678.00006)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Electric Resistance"])
 item_type = "\"legs\""
