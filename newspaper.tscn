@@ -32,16 +32,16 @@ text = "Adventu"
 [node name="Fluff" type="Label" parent="." unique_id=2051127422]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 227.0
+offset_top = 201.0
 offset_right = 324.0
 offset_bottom = 1056.0
 
 [node name="Fluff2" type="Label" parent="." unique_id=1834530022]
 layout_mode = 0
-offset_left = 1582.0
-offset_top = 170.0
-offset_right = 1893.0
-offset_bottom = 1062.0
+offset_left = 1591.0
+offset_top = 180.0
+offset_right = 1902.0
+offset_bottom = 1060.0
 
 [node name="MainArticle" type="RichTextLabel" parent="." unique_id=1602461180]
 layout_mode = 0

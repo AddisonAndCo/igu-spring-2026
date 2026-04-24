@@ -28,7 +28,7 @@ var minigames_completed = {
 }
 signal day_complete
 
-func _ready(): # TEMP JUST FOR TEST RMOVE LATER !!!!
+func _ready(): # TEMP JUST FOR TEST REMOVE LATER !!!!
   minigames_completed["blacksmith"] = true
   minigames_completed["typing"] = true 
 
