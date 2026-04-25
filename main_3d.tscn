@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bbxo2ygwoxy17" path="res://character_body_3d.gd" id="1_ksu1u"]
 [ext_resource type="PackedScene" uid="uid://bp6v7rlbnuqu3" path="res://shop.glb" id="1_r66bj"]
-[ext_resource type="Texture2D" uid="uid://yljxjuijg3th" path="res://Characters/male1.png" id="1_xofcu"]
 [ext_resource type="Script" uid="uid://dwfac73a7s42h" path="res://lantern_light.gd" id="2_un2pc"]
-[ext_resource type="Texture2D" uid="uid://bf6kx2hc7nv0q" path="res://Characters/female2.png" id="2_vipva"]
 [ext_resource type="Script" uid="uid://c34uudxsew5ld" path="res://selecthighlight.gd" id="3_b5jwv"]
+[ext_resource type="Script" uid="uid://5jxl8xexvdgu" path="res://hero_sprite.gd" id="4_h6orv"]
 [ext_resource type="Material" uid="uid://b71mrpu3ctwfs" path="res://outline_material.tres" id="4_p1ib0"]
 [ext_resource type="PackedScene" uid="uid://ddeje4in068a" path="res://src/minigames/armor/dressup.tscn" id="5_8jj3j"]
 [ext_resource type="PackedScene" uid="uid://dt7tc557psshg" path="res://chandelier.glb" id="8_xjxh8"]
@@ -51,7 +50,7 @@ flip_h = true
 texture = ExtResource("10_238tj")
 
 [node name="subText" type="Sprite3D" parent="." unique_id=795510244]
-transform = Transform3D(0.235, 0, 0, 0, 0.14, 0, 0, 0, 0.645, -2.153078, 3.3621793, -0.531)
+transform = Transform3D(0.235, 0, 0, 0, 0.14, 0, 0, 0, 0.645, -2.0830436, 3.3621793, -0.531)
 texture = SubResource("ViewportTexture_0xv2w")
 
 [node name="SpeechBubbleRoot" type="Node3D" parent="." unique_id=1072704619]
@@ -87,14 +86,9 @@ theme_override_font_sizes/font_size = 30
 text = "Interact with the lamp to begin the Armory minigame. Interact with the tome to begin the Magic minigame. The adventurer's order will be completed and the day will end when all minigames have been completed. "
 autowrap_mode = 2
 
-[node name="male1" type="Sprite3D" parent="." unique_id=758989959]
-transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.084891796, 1.1484364, -0.79036003)
-visible = false
-texture = ExtResource("1_xofcu")
-
-[node name="fem1" type="Sprite3D" parent="." unique_id=372117252]
+[node name="HeroSprite" type="Sprite3D" parent="." unique_id=372117252]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.084891796, 1.2615596, -0.79036003)
-texture = ExtResource("2_vipva")
+script = ExtResource("4_h6orv")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=653682531]
 script = ExtResource("1_ksu1u")
@@ -233,6 +227,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.6
 
 [node name="St_Augustine-grass" parent="outside" index="0" unique_id=324119803]
 transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -2.6265037)
+
+[node name="Stone Wall" parent="outside" index="5" unique_id=1883884211]
+transform = Transform3D(-2.0653942, 0, -1.805625e-07, 0, 2.0653942, 0, 1.805625e-07, 0, -2.0653942, 1.1573186, -0.07506871, 29.50932)
 
 [node name="Wall" parent="outside" index="6" unique_id=1175924086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.391244, 0, -9.789347)

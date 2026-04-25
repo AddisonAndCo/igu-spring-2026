@@ -92,7 +92,7 @@ theme_override_constants/margin_bottom = 6
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 65
+theme_override_font_sizes/normal_font_size = 72
 theme_override_styles/normal = SubResource("StyleBoxFlat_8sy2j")
 
 [node name="NextDay" type="Button" parent="." unique_id=47156506]

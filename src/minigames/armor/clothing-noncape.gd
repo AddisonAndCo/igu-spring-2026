@@ -47,6 +47,7 @@ func check_snap():
         audio_stream_player.play()
         stat_label.visible = true
         stat_label.text = "\n".join(stats)
+        Daymanager.equipped_items.append({"type": item_type})
         return
   scale = small_scale
   global_position = home_pos

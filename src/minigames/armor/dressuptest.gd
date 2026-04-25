@@ -1,17 +1,20 @@
 extends Node2D
 
+signal dressup_back_requested(n: Node)
 signal dressup_finished
+
 var finalized = false
 
 func _ready():
   process_mode = Node.PROCESS_MODE_ALWAYS
   finalized = false
   $Finalize.disabled = false
-  #print("finalize disabled: ", $Finalize.disabled)
-  
-func _on_back_button_pressed():
-  get_tree().change_scene_to_file("res://main_3d.tscn")
 
+  $BackButton.pressed.connect(_on_back_pressed)
+
+func _on_back_pressed() -> void:
+  dressup_back_requested.emit(self)
+  
 func _on_button_pressed():
   print("button pressed!!!")
   finalized = true
@@ -36,7 +39,3 @@ func lock_all_pieces():
     # print(get_tree().get_nodes_in_group("clothing").size())
     for piece in get_tree().get_nodes_in_group("clothing"):
         piece.set("locked", true)
-
-
-func _on_back_pressed() -> void:
-  pass # Replace with function body.

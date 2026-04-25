@@ -18,8 +18,11 @@ func _ready():
   dressup_layer.visible = false
   dressup.visible = false
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+  
   dressup_trigger.clicked.connect(_on_dressup_clicked)
   dressup.dressup_finished.connect(_on_dressup_closed)
+  dressup.dressup_back_requested.connect(_on_game_back)
+  
   tome.clicked.connect(_on_tome_clicked)
   Daymanager.day_complete.connect(_on_day_complete)
 
@@ -43,9 +46,13 @@ func _on_dressup_closed():
 func _on_game_back(sender: Node):
   in_minigame = false
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-  if sender:
-    sender.queue_free()
 
+  if sender == dressup:
+    dressup_layer.visible = false
+    dressup.visible = false
+  else:
+    if sender:
+      sender.queue_free()
 
 func _on_tome_clicked():
   if Daymanager.is_game_coplete("typing"):

@@ -1,13 +1,12 @@
 extends Node
 
+signal day_randomized
 enum MissionType {COMBAT, DELIVERY}
 var mission_type = MissionType.DELIVERY # This will change per day ?
-var customer_name = "Frieren"
-# var enemy = "the green slime"
-var place = "Magnetic Mountains"
-var equipment_name = "electric-resistant armour"
+var customer_name: String = "" 
 var customer_requirements: Array[String] = [] 
 var required_magic = MagicElement.Type.WATER  # set per day
+var equipped_items = []
 var equipped_stats: Array[String] = [] # What the player equipped
 var day_results = {
   "dressup": {
@@ -30,14 +29,17 @@ var minigames_completed = {
 signal day_complete
 
 func randomize_day():
+  randomize_character()
   var magic_types = MagicElement.Type.values()
   required_magic = magic_types[randi() % magic_types.size()]
+  emit_signal("day_randomized")
     
   var req_keys = STAT_GROUPS.keys()
   req_keys.shuffle()
   customer_requirements = Array(req_keys.slice(0, 2), TYPE_STRING, "", null)
 
 func _ready():
+  randomize()
   randomize_day()
   minigames_completed["blacksmith"] = true # remove when blacksmith added
 
@@ -64,12 +66,30 @@ func complete_minigame(game_name: String):
   print("Day complete!")
   emit_signal("day_complete") #trigger the newspaper
 
-
 func check_day_complete():
   for game in minigames_completed:
     if not minigames_completed[game]:
       return
   emit_signal("day_complete") #trigger the newspaper
+  
+const CHARACTERS = [
+  {"name": "Elaria", "sprite": preload("res://Art for Shop Game/Characters/female2.png")},
+  {"name": "Asema", "sprite": preload("res://Art for Shop Game/Characters/male1.png")},
+  ]
+var current_character = CHARACTERS[0]
+
+func randomize_character():
+  current_character = CHARACTERS[randi() % CHARACTERS.size()]
+  customer_name = current_character.name
+  
+const PLACE_NAMES = {
+  "+Fire Resistance": ["the Volcanic Valley", "the Ember Wastes"],
+  "+Poison Resistance": ["the Poisonous Prison", "the Toxic Temple"],
+  "+Cold Resistance": ["the Terrible Tundra", "the Freezing Fairway"],
+  "+Electric Resistance": ["the Magnetic Mountains", "the Ligtning Fields"],
+  "+Wind Resistance": ["the Breezy Battleground", "the Gusty Graveyard", "the Sweltering Sanctum"],
+  "+Water Resistance": ["the Sunken Ruins", "the Drowned Den", "the Waterlogged Warzone"],
+  }
 
 const DIALOGUE_TEMPLATES = [
   "Hello, Shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and my armour also needs to deal with {req1} conditions, and I'll be travelling {magic}.",
@@ -103,6 +123,27 @@ func get_customer_dialogue() -> String:
     var template = DIALOGUE_TEMPLATES[randi() % DIALOGUE_TEMPLATES.size()]
     return template.replace("{req0}", word1).replace("{req1}", word2).replace("{magic}", magic_hint)
 
+func get_place() -> String:
+    if not customer_requirements.is_empty():
+        var places = PLACE_NAMES.get(customer_requirements[0], ["the Unknown Lands"])
+        return places[randi() % places.size()]
+    return "the Unknown Lands"
+    
+func get_magic_name() -> String:
+  match required_magic:
+    MagicElement.Type.WATER: return "Water Breathing"
+    MagicElement.Type.MEND: return "Mending"
+    MagicElement.Type.HEAL: return "Healing"
+    MagicElement.Type.FLIGHT: return "Flight"
+  return "magic"
+  
+func get_equipment_name() -> String:
+    if equipped_items.is_empty():
+        return "their equipment"
+    if equipped_items.size() == 1:
+        return "their " + equipped_items[0].type
+    return "their armour"
+
 func check_outfit() -> bool:
   for requirement in customer_requirements:
     var met = false
@@ -120,20 +161,21 @@ func check_outfit() -> bool:
 
 func get_newspaper_article() -> String:
   var outcome = get_newspaper_outcome()
-  var magic = "magic"
-  if day_results.typing.choice:
-      magic = day_results.typing.choice
+  var magic = get_magic_name()
+  var place = get_place()
+  var equipment = get_equipment_name()
+  
   match outcome:
     1:
-      return customer_name + " defeated the enemy in " + place + ". " + equipment_name + " proved extremely valuable and impactful. They say that without it, they would have surely perished."
+      return customer_name + " defeated the enemy in " + place + ". " + equipment + " proved extremely valuable and impactful. They say that without it, they would have surely perished."
    # 2:
    #   return customer_name + " perished at the hands of " + enemy + " in " + place + ". " + equipment_name + " was unfortunately not enough to kill " + enemy + ". Had they prepared better, they may have succeeded."
     3:
-      return customer_name + " perished during their journey through " + place + ". " + equipment_name + " was unfortunately not enough to withstand " + place + ". Had they prepared better, they may have succeeded."
+      return customer_name + " perished during their journey through " + place + ". " + equipment + " was unfortunately not enough to withstand " + place + ". Had they prepared better, they may have succeeded."
     4:
-      return customer_name + " succeeded in traversing through " + place + " to deliver their parcel, aided by the power of " + magic + ". The recipient was thrilled and the courier made their way home safely thanks to " + equipment_name + "."
+      return customer_name + " succeeded in traversing through " + place + " to deliver their parcel, aided by the power of " + magic + ". The recipient was thrilled and the courier made their way home safely thanks to " + equipment + "."
     5:
-      return customer_name + " failed in traversing through " + place + " delivering their parcel, despite having " + magic + ". it was not enough. " + equipment_name + " was frail and destroyed enroute. The recipient was distraught to learn of their passing."
+      return customer_name + " failed in traversing through " + place + " delivering their parcel, despite having " + magic + ". it was not enough. " + equipment + " was frail and destroyed enroute. The recipient was distraught to learn of their passing."
     _:
       return "No news today."
 
@@ -152,6 +194,7 @@ func get_newspaper_outcome() -> int:
     return 4 # full success
 
 func reset_day():
+  equipped_items = []
   day_results.dressup.outfit = []
   day_results.blacksmith.passed = false
   day_results.typing.passed = false
