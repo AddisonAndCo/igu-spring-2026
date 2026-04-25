@@ -14,9 +14,10 @@ func _on_back():
 
 
 func _on_magic_picked(magic_element: MagicElement.Type, color: Color) -> void:
-    var mg = MagicGame.new_magic_game(magic_element, color)
-    magic_picked.emit(mg)
-    queue_free()
+  Daymanager.day_results.typing.choice = magic_element
+  var mg = MagicGame.new_magic_game(magic_element, color)
+  magic_picked.emit(mg)
+  queue_free()
 
 
 const mp_scene: PackedScene = preload("res://src/minigames/magic/magic_picker.tscn")

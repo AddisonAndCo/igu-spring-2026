@@ -1,19 +1,20 @@
 [gd_scene format=3 uid="uid://ddeje4in068a"]
 
-[ext_resource type="Script" uid="uid://cpgucdku27b1" path="res://dressuptest.gd" id="1_b5p66"]
+[ext_resource type="Script" uid="uid://cpgucdku27b1" path="res://src/minigames/armor/dressuptest.gd" id="1_b5p66"]
 [ext_resource type="Texture2D" uid="uid://d2ke2myp6rbwx" path="res://Art for Shop Game/model_male.png" id="1_s3gf1"]
 [ext_resource type="FontFile" uid="uid://movh8dkratit" path="res://Eadui.ttf" id="2_t7nj0"]
+[ext_resource type="Texture2D" uid="uid://cqdxx05thbavn" path="res://assets/backgrounds/bg2.png" id="2_y8xeh"]
 [ext_resource type="PackedScene" uid="uid://ds51p3tqp2iib" path="res://AllClothes/shoulder1.tscn" id="3_7jytk"]
 [ext_resource type="Script" uid="uid://dmslt71vlpme8" path="res://snapindex.gd" id="4_7jluf"]
 [ext_resource type="PackedScene" uid="uid://d15j8kpsv1smr" path="res://AllClothes/shoulder2.tscn" id="5_eqgg3"]
 [ext_resource type="PackedScene" uid="uid://31y2x5d4jajv" path="res://AllClothes/breastplate1.tscn" id="5_oqy0g"]
 [ext_resource type="PackedScene" uid="uid://cmj7j14v788af" path="res://AllClothes/cape1.tscn" id="6_55stl"]
-[ext_resource type="Script" uid="uid://78qehnrh3dxn" path="res://clothing-noncape.gd" id="6_t7nj0"]
+[ext_resource type="Script" uid="uid://78qehnrh3dxn" path="res://src/minigames/armor/clothing-noncape.gd" id="6_t7nj0"]
 [ext_resource type="PackedScene" uid="uid://dkwmbmfs1gvhq" path="res://AllClothes/greaves1.tscn" id="7_56gbh"]
 [ext_resource type="PackedScene" uid="uid://chdo4frnjeq0x" path="res://AllClothes/helmet1.tscn" id="8_vpeps"]
 [ext_resource type="PackedScene" uid="uid://d3iyel3xkgtcd" path="res://AllClothes/helmet2.tscn" id="9_tqxck"]
 [ext_resource type="PackedScene" uid="uid://ds1xluyypa2ld" path="res://AllClothes/helmet3.tscn" id="10_hefvw"]
-[ext_resource type="Script" uid="uid://dq00212lter81" path="res://clothing-cape.gd" id="10_v641g"]
+[ext_resource type="Script" uid="uid://dq00212lter81" path="res://src/minigames/armor/clothing-cape.gd" id="10_v641g"]
 [ext_resource type="PackedScene" uid="uid://cvhbc455qu8pj" path="res://AllClothes/pants1.tscn" id="11_bes58"]
 [ext_resource type="PackedScene" uid="uid://jd1a8ioykj7l" path="res://AllClothes/cape2.tscn" id="12_vosqe"]
 [ext_resource type="PackedScene" uid="uid://ca14vlnltgy5s" path="res://AllClothes/pants2.tscn" id="13_m148i"]
@@ -45,17 +46,10 @@ size = Vector2(309.5, 100.625)
 process_mode = 3
 script = ExtResource("1_b5p66")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=108790410]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.26889107, 0.20275599, 2.4065375e-08, 1)
-metadata/_edit_use_anchors_ = true
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1103653115]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_y8xeh")
 
 [node name="Finalize" type="Button" parent="." unique_id=1099132191]
 anchors_preset = 15
@@ -71,6 +65,14 @@ theme_override_fonts/font = ExtResource("2_t7nj0")
 theme_override_font_sizes/font_size = 75
 text = "Done"
 metadata/_edit_use_anchors_ = true
+
+[node name="Back" type="Button" parent="." unique_id=143857636]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 251.0
+offset_bottom = 131.0
+theme_override_font_sizes/font_size = 75
+text = "Back"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1456954953]
 position = Vector2(960, 540)
@@ -159,7 +161,7 @@ item_type = "\"shoulder\""
 
 [node name="shoulder2" parent="." unique_id=1150457886 instance=ExtResource("5_eqgg3")]
 z_index = 2
-position = Vector2(444.00003, 85)
+position = Vector2(1507, 614)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])
 item_type = "\"shoulder2\""
@@ -172,7 +174,7 @@ stats = Array[String](["+Cold Resistance"])
 item_type = "\"breastplate\""
 
 [node name="cape1" parent="." unique_id=479386519 instance=ExtResource("6_55stl")]
-position = Vector2(147, 225.00002)
+position = Vector2(144.00002, 605)
 script = ExtResource("10_v641g")
 stats = Array[String](["+Wind Resistance"])
 item_type = "\"cape\""
@@ -198,14 +200,14 @@ item_type = "\"feet\""
 
 [node name="helmet1" parent="." unique_id=520407690 instance=ExtResource("8_vpeps")]
 z_index = 2
-position = Vector2(131, 914)
+position = Vector2(138, 962)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Poison Resistance"])
 item_type = "\"helmet\""
 
 [node name="helmet2" parent="." unique_id=1542652533 instance=ExtResource("9_tqxck")]
 z_index = 2
-position = Vector2(381, 301)
+position = Vector2(519, 277)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Water Resistance"])
@@ -226,8 +228,9 @@ stats = Array[String](["+Electric Resistance"])
 item_type = "\"legs\""
 
 [node name="pants2" parent="." unique_id=1605968673 instance=ExtResource("13_m148i")]
-position = Vector2(148, 605)
+position = Vector2(683, 819)
 script = ExtResource("6_t7nj0")
 item_type = "\"legs\""
 
 [connection signal="pressed" from="Finalize" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_button_pressed"]

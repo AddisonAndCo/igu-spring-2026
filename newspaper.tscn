@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cagr8motlcf8a"]
 
 [ext_resource type="Script" uid="uid://day5wocjurnmm" path="res://newspaper.gd" id="1_reqrk"]
-[ext_resource type="Texture2D" uid="uid://dd1xxgitpe7vw" path="res://newspaper_bg.png" id="2_8sy2j"]
+[ext_resource type="Texture2D" uid="uid://bxvwp1sfbqphm" path="res://assets/backgrounds/newspaper_bg.png" id="2_8sy2j"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_tcvqs"]
 
