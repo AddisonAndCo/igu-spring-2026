@@ -38,7 +38,6 @@ func _on_dressup_closed():
     in_minigame = false
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
 func _on_tome_clicked():
 #    realistically this should bring up some kind of menu to do the picking
     in_minigame = true
@@ -55,8 +54,10 @@ func _on_magic_game_complete(_magic_type: String, _success: bool) -> void:
         assert(false)
     in_minigame = false
 
-
 func _process(_delta):
+    if $AudioStreamPlayer2D.playing == false:
+      $AudioStreamPlayer2D.play()
+
     if in_minigame:
         return
     var hit = ray.get_collider()
