@@ -32,20 +32,43 @@ func _on_dressup_clicked():
         highlighted_object.on_hover_exit()
         highlighted_object = null
 
+
 func _on_dressup_closed():
     dressup_layer.visible = false
     dressup.visible = false
     in_minigame = false
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
+func _on_game_back(sender: Node):
+    in_minigame = false
+    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+    if sender:
+        sender.queue_free()
+
+
 func _on_tome_clicked():
-#    realistically this should bring up some kind of menu to do the picking
+    if Daymanager.is_game_coplete("typing"):
+        return
+
     in_minigame = true
-    var mg = MagicGame.new_magic_game(MagicElement.Type.FLIGHT)
+    Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+    if highlighted_object:
+        highlighted_object.on_hover_exit()
+        highlighted_object = null
+
+    var mp = MagicPicker.new_magic_picker()
+    mp.connect("magic_back_requested", _on_game_back)
+    mp.connect("magic_picked", _on_magic_game_created)
+    add_child(mp)
+
+
+func _on_magic_game_created(mg: MagicGame):
     mg.connect("magic_game_complete", Daymanager._on_magic_game_complete)
     mg.connect("magic_game_complete", _on_magic_game_complete)
     add_child(mg)
-    
+
+
 func _on_magic_game_complete(_magic_type: String, _success: bool) -> void:
     var mg = get_node("MagicGame")
     if mg:
@@ -53,6 +76,8 @@ func _on_magic_game_complete(_magic_type: String, _success: bool) -> void:
     else:
         assert(false)
     in_minigame = false
+    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _process(_delta):
     if $AudioStreamPlayer2D.playing == false:

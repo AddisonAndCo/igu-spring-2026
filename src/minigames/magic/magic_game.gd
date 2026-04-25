@@ -1,24 +1,7 @@
 class_name MagicGame extends Node
 
 @export var element: MagicElement.Type
-
-# Should games be themed?
-# Core: take word bank and randomize selection and ordering
-# display words for the player to type out
-# kick off a 20 second timer, record wpm
-# input - enum representing type of spell (ice, fire, electric, earth, wind, poison)
-# output - wpm, to be converted into a score by a higher layer
-# edge cases:
-# typo - set off a signal, do not advance the cursor
-# player types all the words - unlikely but in this case I guess they'd auto win
-
-# TODOE_NAME = "Ch
-# X define elemental enum
-# X define class that takes in enum and retrieves corresponding word bank
-# X on class creation, randomize word bank
-# present text, allow for styling
-# enable keyboard inputs to control cursor
-# set timer and scoring stuff
+@export var color_override: Color
 
 signal magic_game_complete(magic_element: String, passed_threshold: bool)
 
@@ -53,7 +36,7 @@ func _ready() -> void:
             bank += word + " "
         bank += bank_arr[bank_arr.size() - 1]
 
-    mt = MagicText.new_magic_text(bank)
+    mt = MagicText.new_magic_text(bank, color_override)
     add_child(mt)
 
     _update_timer_display()
@@ -94,6 +77,12 @@ func _on_timeout():
     wpm = wpm * (60.0 / $Timer.wait_time)
     _update_timer_display()
     set_process_unhandled_key_input(false)
+
+    $FinishedLayer.show()
+    $FinishedLayer/Button.connect("pressed", _on_game_finish)
+    $FinishedLayer/score_label.append_text(str(wpm))
+
+func _on_game_finish():
     magic_game_complete.emit(el, wpm > 40)
 
 
@@ -112,7 +101,8 @@ func _update_timer_display() -> void:
 
 # Factory function
 const magic_game_scene: PackedScene = preload("res://src/minigames/magic/magic_game.tscn")
-static func new_magic_game(elm: MagicElement.Type) -> MagicGame:
+static func new_magic_game(elm: MagicElement.Type, color: Color) -> MagicGame:
     var mg = magic_game_scene.instantiate()
     mg.element = elm
+    mg.color_override = color
     return mg

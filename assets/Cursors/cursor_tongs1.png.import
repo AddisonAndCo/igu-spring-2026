@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpcjmnasuwk2f"
-path="res://.godot/imported/cursor_tongs1.png-ff6a4d58ca56b6bc2d36b7f9f71d39d8.ctex"
+path="res://.godot/imported/cursor_tongs1.png-933a3dc77b59506469787836f8d56e92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cursors/cursor_tongs1.png"
-dest_files=["res://.godot/imported/cursor_tongs1.png-ff6a4d58ca56b6bc2d36b7f9f71d39d8.ctex"]
+source_file="res://assets/Cursors/cursor_tongs1.png"
+dest_files=["res://.godot/imported/cursor_tongs1.png-933a3dc77b59506469787836f8d56e92.ctex"]
 
 [params]
 

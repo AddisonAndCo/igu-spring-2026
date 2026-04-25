@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chdnfemjt452w"
-path="res://.godot/imported/cursor_hammer.png-19113ca9501ddda0048027e2f6972642.ctex"
+path="res://.godot/imported/cursor_hammer.png-08c1ca9eac6d62f75aa66d045bd8fc69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cursors/cursor_hammer.png"
-dest_files=["res://.godot/imported/cursor_hammer.png-19113ca9501ddda0048027e2f6972642.ctex"]
+source_file="res://assets/Cursors/cursor_hammer.png"
+dest_files=["res://.godot/imported/cursor_hammer.png-08c1ca9eac6d62f75aa66d045bd8fc69.ctex"]
 
 [params]
 

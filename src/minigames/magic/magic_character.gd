@@ -105,7 +105,7 @@ func _emit_hit_particles() -> void:
         var direction = Vector2(cos(angle), sin(angle))
 
         particle.mouse_filter = Control.MOUSE_FILTER_IGNORE
-        particle.color = hit_particle_color.lerp(Color.WHITE, 0.35)
+        particle.color = hit_particle_color.lerp(done_fill_color, 0.35)
         particle.size = particle_size
         particle.position = center - (particle_size * 0.5)
         hit_particles.add_child(particle)
@@ -118,8 +118,9 @@ func _emit_hit_particles() -> void:
 
 
 const magic_character_scene: PackedScene = preload("res://src/minigames/magic/magic_character.tscn")
-static func new_magic_character(c: String, new_slot_size: Vector2) -> MagicCharacter:
+static func new_magic_character(c: String, new_slot_size: Vector2, fill_color: Color) -> MagicCharacter:
     var character = magic_character_scene.instantiate() as MagicCharacter
     character._set_text(c)
     character._set_slot_size(new_slot_size)
+    character.done_fill_color = fill_color
     return character
