@@ -28,9 +28,9 @@ var minigames_completed = {
 }
 signal day_complete
 
-func _ready(): # TEMP JUST FOR TEST REMOVE LATER !!!! 
-    minigames_completed["blacksmith"] = true
-    minigames_completed["typing"] = true
+func _ready():
+  minigames_completed["blacksmith"] = true # TEMP JUST FOR TEST REMOVE LATER !!!! 
+  minigames_completed["typing"] = true # TEMP JUST FOR TEST REMOVE LATER !!!!
 
 func _on_magic_game_complete(magic_type: String, success: bool) -> void:
     minigames_completed["typing"] = true
@@ -38,10 +38,13 @@ func _on_magic_game_complete(magic_type: String, success: bool) -> void:
     day_results["typing"]["choice"] = magic_type
 
 func complete_minigame(game_name: String):
+    print("complete_minigame called with: ", game_name)
     minigames_completed[game_name] = true
     for game in minigames_completed:
-        if not minigames_completed[game]:
+      print(game, ": ", minigames_completed[game])
+      if not minigames_completed[game]:
             return
+    print("Day complete!")
     emit_signal("day_complete") #trigger the newspaper
 
 func check_day_complete():
@@ -51,7 +54,7 @@ func check_day_complete():
     emit_signal("day_complete") #trigger the newspaper
 
 const DIALOGUE_TEMPLATES = [
-    "Hello, Shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and it also needs to deal with {req1} conditions.",
+    "Hello, Shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and my armour also needs to deal with {req1} conditions.",
     "Dear Shopkeeper, I am in need of some armour to protect me from somewhere {req0}. Oh, and also protect me from {req1} dangers.",
     "Well met, Shopkeeper. I require some of your finest armour to protect me from someplace {req0} and also be properly equipped for {req1} conditions."]
 
@@ -115,7 +118,13 @@ func get_newspaper_outcome() -> int:
     else:
         return 4 # full success
 
-func reset_day():
+func reset_day(): 
     day_results.dressup.outfit = []
     day_results.blacksmith.passed = false
     day_results.typing.passed = false
+    minigames_completed["dressup"] = false
+    minigames_completed["blacksmith"] = false
+    minigames_completed["typing"] = false
+    minigames_completed["blacksmith"] = true # TEMP JUST FOR TEST REMOVE LATER !!!! 
+    minigames_completed["typing"] = true # TEMP JUST FOR TEST REMOVE LATER !!!!
+    print("after reset: ", minigames_completed)

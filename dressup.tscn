@@ -41,7 +41,7 @@ size = Vector2(251, 357)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdj4j"]
 size = Vector2(309.5, 100.625)
 
-[node name="Main" type="Node2D" unique_id=1906638217]
+[node name="Main" type="Node2D" unique_id=1285845176]
 process_mode = 3
 script = ExtResource("1_b5p66")
 
@@ -49,23 +49,26 @@ script = ExtResource("1_b5p66")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -4121.0
-offset_top = -1936.0
-offset_right = 3579.0
-offset_bottom = 2464.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.21230483, 0.21230483, 0.21230483, 1)
+mouse_filter = 2
+color = Color(0.26889107, 0.20275599, 2.4065375e-08, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Finalize" type="Button" parent="." unique_id=1099132191]
-offset_left = 1384.0
-offset_top = 893.0
-offset_right = 3157.0
-offset_bottom = 1384.0
-scale = Vector2(0.25, 0.25)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1518.0
+offset_top = 885.0
+offset_right = 1818.0
+offset_bottom = 1035.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_t7nj0")
-theme_override_font_sizes/font_size = 425
+theme_override_font_sizes/font_size = 75
 text = "Done"
 metadata/_edit_use_anchors_ = true
 
@@ -182,7 +185,7 @@ item_type = "\"cape\""
 
 [node name="greaves1" parent="." unique_id=793588251 instance=ExtResource("7_56gbh")]
 z_index = 2
-position = Vector2(1769, 399.00003)
+position = Vector2(1798, 287.00003)
 scale = Vector2(0.15, 0.15)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Cold Resistance"])
@@ -210,14 +213,14 @@ item_type = "\"helmet\""
 
 [node name="helmet3" parent="." unique_id=843832829 instance=ExtResource("10_hefvw")]
 z_index = 2
-position = Vector2(1519, 565)
+position = Vector2(1612, 386)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Fire Resistance"])
 item_type = "\"helmet\""
 
 [node name="pants1" parent="." unique_id=974052682 instance=ExtResource("11_bes58")]
 z_index = 2
-position = Vector2(1761, 678.00006)
+position = Vector2(1759, 637)
 script = ExtResource("6_t7nj0")
 stats = Array[String](["+Electric Resistance"])
 item_type = "\"legs\""

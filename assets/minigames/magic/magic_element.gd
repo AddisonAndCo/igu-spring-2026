@@ -1,7 +1,7 @@
 class_name MagicElement
 enum Type {
-	FLIGHT,
-	HEAL,
-	MEND,
-	WATER
+  FLIGHT,
+  HEAL,
+  MEND,
+  WATER
 }

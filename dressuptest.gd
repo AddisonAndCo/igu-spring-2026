@@ -7,9 +7,10 @@ func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
     finalized = false
     $Finalize.disabled = false
-    print("finalize disabled: ", $Finalize.disabled)
+    #print("finalize disabled: ", $Finalize.disabled)
 
 func _on_button_pressed():
+    print("button pressed!!!")
     finalized = true
     #$Finalize.disabled = true  (removing this to prevent softlock)
     lock_all_pieces() # Can't move anymore (redundant)

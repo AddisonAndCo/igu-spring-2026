@@ -46,8 +46,7 @@ func _on_tome_clicked():
     mg.connect("magic_game_complete", Daymanager._on_magic_game_complete)
     mg.connect("magic_game_complete", _on_magic_game_complete)
     add_child(mg)
-
-
+    
 func _on_magic_game_complete(_magic_type: String, _success: bool) -> void:
     var mg = get_node("MagicGame")
     if mg:
