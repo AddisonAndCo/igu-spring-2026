@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://cueoniin7b6yu" path="res://order.gd" id="9_et6uk"]
 [ext_resource type="Texture2D" uid="uid://c01bf7jf1wc1y" path="res://Art for Shop Game/speech2.png" id="10_238tj"]
 [ext_resource type="PackedScene" uid="uid://dj4gbqi0ts68i" path="res://outside.glb" id="10_wi601"]
-[ext_resource type="PackedScene" uid="uid://xqo3oyka2dba" path="res://fadetransition.tscn" id="13_h6orv"]
+[ext_resource type="PackedScene" path="res://fadetransition.tscn" id="13_h6orv"]
 [ext_resource type="AudioStream" uid="uid://tagulrkqf7mv" path="res://Music/fantasy_1.wav" id="14_vomke"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_egb7q"]
@@ -78,12 +78,12 @@ stream = ExtResource("14_vomke")
 
 [node name="shop" parent="." unique_id=157018700 instance=ExtResource("1_r66bj")]
 
-[node name="Book_Tome" parent="shop" index="1" unique_id=1547952168 node_paths=PackedStringArray("mesh")]
+[node name="Book_Tome" parent="shop" index="1" unique_id=2090431289 node_paths=PackedStringArray("mesh")]
 script = ExtResource("3_b5jwv")
 mesh = NodePath("Cube_025")
 outline_material = ExtResource("4_p1ib0")
 
-[node name="Cube_025" parent="shop/Book_Tome" index="0" unique_id=96583531]
+[node name="Cube_025" parent="shop/Book_Tome" index="0" unique_id=38887575]
 layers = 2
 
 [node name="StaticBody3D" type="StaticBody3D" parent="shop/Book_Tome/Cube_025" index="0" unique_id=61594590]
@@ -93,29 +93,29 @@ collision_layer = 2
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -1.4901161e-08, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_8jj3j")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="shop/Floor" parent_id_path=PackedInt32Array(157018700, 467526672) index="0" unique_id=11143376]
+[node name="StaticBody3D" type="StaticBody3D" parent="shop/Floor" parent_id_path=PackedInt32Array(157018700, 890740432) index="0" unique_id=11143376]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/Floor/StaticBody3D" unique_id=34448512]
 transform = Transform3D(6.375, 0, 0, 0, 0.619668, 0, 0, 0, 6.375, -0.0363808, -0.210058, -0.014226)
 shape = SubResource("BoxShape3D_f1c4m")
 
-[node name="Blacksmith Hammer" parent="shop" index="30" unique_id=609520283 node_paths=PackedStringArray("mesh")]
+[node name="Blacksmith Hammer" parent="shop" index="30" unique_id=1346889894 node_paths=PackedStringArray("mesh")]
 script = ExtResource("3_b5jwv")
 mesh = NodePath("BlacksmithHammer01_l")
 outline_material = ExtResource("4_p1ib0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="shop/Blacksmith Hammer/BlacksmithHammer01_l" parent_id_path=PackedInt32Array(157018700, 1985587066) index="0" unique_id=205836833]
+[node name="StaticBody3D" type="StaticBody3D" parent="shop/Blacksmith Hammer/BlacksmithHammer01_l" parent_id_path=PackedInt32Array(157018700, 1888618425) index="0" unique_id=205836833]
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/Blacksmith Hammer/BlacksmithHammer01_l/StaticBody3D" unique_id=646484460]
 shape = SubResource("ConcavePolygonShape3D_fp0x7")
 
-[node name="Old Lantern" parent="shop" index="33" unique_id=380361090 node_paths=PackedStringArray("mesh")]
+[node name="Old Lantern" parent="shop" index="33" unique_id=1984060370 node_paths=PackedStringArray("mesh")]
 script = ExtResource("3_b5jwv")
 mesh = NodePath("Cylinder_007")
 outline_material = ExtResource("4_p1ib0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="shop/Old Lantern/Cylinder_007" parent_id_path=PackedInt32Array(157018700, 545243726) index="0" unique_id=1310008963]
+[node name="StaticBody3D" type="StaticBody3D" parent="shop/Old Lantern/Cylinder_007" parent_id_path=PackedInt32Array(157018700, 1867328081) index="0" unique_id=1310008963]
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="shop/Old Lantern/Cylinder_007/StaticBody3D" unique_id=1884811168]
@@ -156,10 +156,10 @@ environment = SubResource("Environment_fglfq")
 [node name="chandelier" parent="." unique_id=1797187570 instance=ExtResource("8_xjxh8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.232151, 0)
 
-[node name="Torus" parent="chandelier" index="0" unique_id=564481061]
+[node name="Torus" parent="chandelier" index="0" unique_id=40470502]
 transform = Transform3D(0.79998994, -0.00200266, -0.00012820604, 0.00400339, 0.39998618, -0.0024580215, 0.00030380124, 0.0026565935, 0.3699918, 0, 0, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="chandelier/Chandelier" parent_id_path=PackedInt32Array(1797187570, 638113317) index="24" unique_id=881827562]
+[node name="OmniLight3D" type="OmniLight3D" parent="chandelier/Chandelier" parent_id_path=PackedInt32Array(1797187570, 1912272614) index="24" unique_id=881827562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.84785795, 0)
 light_color = Color(0.94951016, 0.7537912, 0.5011241, 1)
 light_energy = 2.0
@@ -192,19 +192,19 @@ text = "•"
 [node name="outside" parent="." unique_id=104239417 instance=ExtResource("10_wi601")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.656, -0.1320169, 6.6864033)
 
-[node name="St_Augustine-grass" parent="outside" index="0" unique_id=324119803]
+[node name="St_Augustine-grass" parent="outside" index="0" unique_id=62194947]
 transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -2.6265037)
 
-[node name="Wall" parent="outside" index="6" unique_id=1175924086]
+[node name="Wall" parent="outside" index="6" unique_id=1256388388]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.391244, 0, -9.789347)
 
-[node name="Retopo_3DModel" parent="outside/Wall" index="0" unique_id=984888659]
+[node name="Retopo_3DModel" parent="outside/Wall" index="0" unique_id=359837488]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 0, 3.0738702)
 
-[node name="Retopo_3DModel_001" parent="outside/Wall" index="1" unique_id=16249651]
+[node name="Retopo_3DModel_001" parent="outside/Wall" index="1" unique_id=1264562510]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 5.137594, 3.0738702)
 
-[node name="Retopo_3DModel_002" parent="outside/Wall" index="2" unique_id=1018111377]
+[node name="Retopo_3DModel_002" parent="outside/Wall" index="2" unique_id=1995607563]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6.0459323, 9.938862, 3.0738702)
 
 [node name="SpeechBubbleRoot" type="Node3D" parent="." unique_id=1072704619]

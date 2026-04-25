@@ -29,13 +29,20 @@ var minigames_completed = {
 signal day_complete
 
 func _ready():
-  minigames_completed["blacksmith"] = true # TEMP JUST FOR TEST REMOVE LATER !!!! 
-  minigames_completed["typing"] = true # TEMP JUST FOR TEST REMOVE LATER !!!!
+  minigames_completed["blacksmith"] = true # TEMP JUST FOR TEST REMOVE LATER !!!!
+
+
+func is_game_coplete(game: String) -> bool:
+    if game in minigames_completed:
+        return minigames_completed[game]
+    return false
+
 
 func _on_magic_game_complete(magic_type: String, success: bool) -> void:
-    minigames_completed["typing"] = true
     day_results["typing"]["passed"] = success
     day_results["typing"]["choice"] = magic_type
+    complete_minigame("typing")
+
 
 func complete_minigame(game_name: String):
     print("complete_minigame called with: ", game_name)
@@ -46,6 +53,7 @@ func complete_minigame(game_name: String):
             return
     print("Day complete!")
     emit_signal("day_complete") #trigger the newspaper
+
 
 func check_day_complete():
     for game in minigames_completed:
@@ -118,13 +126,12 @@ func get_newspaper_outcome() -> int:
     else:
         return 4 # full success
 
-func reset_day(): 
+func reset_day():
     day_results.dressup.outfit = []
     day_results.blacksmith.passed = false
     day_results.typing.passed = false
     minigames_completed["dressup"] = false
     minigames_completed["blacksmith"] = false
     minigames_completed["typing"] = false
-    minigames_completed["blacksmith"] = true # TEMP JUST FOR TEST REMOVE LATER !!!! 
-    minigames_completed["typing"] = true # TEMP JUST FOR TEST REMOVE LATER !!!!
+    minigames_completed["blacksmith"] = true # TEMP JUST FOR TEST REMOVE LATER !!!!
     print("after reset: ", minigames_completed)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdnif7i0ujk8h"
-path="res://.godot/imported/cursor_ boom.png-7be058d7054cc42298064c9867d24d59.ctex"
+uid="uid://bxvwp1sfbqphm"
+path="res://.godot/imported/newspaper_bg.png-fb0d8e0e42e910f6d978ed1d310fe0dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Cursors/cursor_ boom.png"
-dest_files=["res://.godot/imported/cursor_ boom.png-7be058d7054cc42298064c9867d24d59.ctex"]
+source_file="res://assets/backgrounds/newspaper_bg.png"
+dest_files=["res://.godot/imported/newspaper_bg.png-fb0d8e0e42e910f6d978ed1d310fe0dd.ctex"]
 
 [params]
 

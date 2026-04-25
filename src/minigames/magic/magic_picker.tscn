@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://oht3fh1uwhjb"]
+
+[ext_resource type="Script" uid="uid://u0xpjwo7tuok" path="res://src/minigames/magic/button_picker.gd" id="1_cfkcc"]
+[ext_resource type="Script" uid="uid://dn5wdsaayybb5" path="res://src/minigames/magic/magic_picker.gd" id="1_chimp"]
+[ext_resource type="Theme" uid="uid://d3tdne58j6fg2" path="res://assets/minigames/magic/magic_text.tres" id="2_3y5pd"]
+[ext_resource type="Script" uid="uid://b4kcdkmn6i2x8" path="res://src/minigames/magic/magic_button.gd" id="3_chimp"]
+[ext_resource type="Texture2D" uid="uid://cqdxx05thbavn" path="res://assets/backgrounds/bg2.png" id="5_vftwp"]
+
+[node name="MagicPicker" type="Control" unique_id=590727777]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_chimp")
+
+[node name="SelectionLayer" type="CanvasLayer" parent="." unique_id=1287273952]
+
+[node name="Container" type="Control" parent="SelectionLayer" unique_id=158850204]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 721.0
+offset_top = 314.0
+offset_right = 1259.0
+offset_bottom = 772.0
+
+[node name="ButtonPicker" type="VBoxContainer" parent="SelectionLayer/Container" unique_id=97898113]
+layout_mode = 0
+offset_right = 528.0
+offset_bottom = 448.0
+script = ExtResource("1_cfkcc")
+
+[node name="WaterButton" type="Button" parent="SelectionLayer/Container/ButtonPicker" unique_id=657408314]
+layout_mode = 2
+theme = ExtResource("2_3y5pd")
+text = "Water Breathing"
+script = ExtResource("3_chimp")
+magic_kind = 3
+color_override = Color(0.006411016, 0.21324179, 0.9223466, 1)
+metadata/_custom_type_script = "uid://b4kcdkmn6i2x8"
+
+[node name="MendButton" type="Button" parent="SelectionLayer/Container/ButtonPicker" unique_id=746253612]
+layout_mode = 2
+theme = ExtResource("2_3y5pd")
+text = "Mend"
+script = ExtResource("3_chimp")
+magic_kind = 2
+color_override = Color(0.83137256, 0.69803923, 0.21960784, 1)
+metadata/_custom_type_script = "uid://b4kcdkmn6i2x8"
+
+[node name="HealButton" type="Button" parent="SelectionLayer/Container/ButtonPicker" unique_id=1350132621]
+layout_mode = 2
+theme = ExtResource("2_3y5pd")
+text = "Heal"
+script = ExtResource("3_chimp")
+magic_kind = 1
+color_override = Color(0.7607843, 0.26666668, 0, 1)
+metadata/_custom_type_script = "uid://b4kcdkmn6i2x8"
+
+[node name="FlightButton" type="Button" parent="SelectionLayer/Container/ButtonPicker" unique_id=1684809320]
+layout_mode = 2
+theme = ExtResource("2_3y5pd")
+text = "Flight"
+script = ExtResource("3_chimp")
+color_override = Color(0.3019608, 1, 0, 1)
+metadata/_custom_type_script = "uid://b4kcdkmn6i2x8"
+
+[node name="BackButton" type="Button" parent="SelectionLayer" unique_id=601865358]
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 254.0
+offset_bottom = 127.0
+theme = ExtResource("2_3y5pd")
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=38164848]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("5_vftwp")
+expand_mode = 1
