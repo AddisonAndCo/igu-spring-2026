@@ -55,11 +55,12 @@ func _on_game_back(sender: Node):
       sender.queue_free()
 
 func _on_tome_clicked():
-  if Daymanager.is_game_coplete("typing"):
+  if Daymanager.is_game_complete("typing"):
     return
 
   in_minigame = true
   Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+  #Input.set_custom_mouse_cursor(preload("res://assets/Cursors/cursor_quill.png")) 
   if highlighted_object:
     highlighted_object.on_hover_exit()
     highlighted_object = null
@@ -71,6 +72,7 @@ func _on_tome_clicked():
 
 
 func _on_magic_game_created(mg: MagicGame):
+  Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
   mg.connect("magic_game_complete", Daymanager._on_magic_game_complete)
   mg.connect("magic_game_complete", _on_magic_game_complete)
   add_child(mg)
@@ -83,7 +85,7 @@ func _on_magic_game_complete(_magic_type: String, _success: bool) -> void:
   else:
     assert(false)
   in_minigame = false
-  Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+  #Input.set_custom_mouse_cursor(null)
 
 
 func _process(_delta):

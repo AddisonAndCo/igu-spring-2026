@@ -44,7 +44,7 @@ func _ready():
   minigames_completed["blacksmith"] = true # remove when blacksmith added
 
 
-func is_game_coplete(game: String) -> bool:
+func is_game_complete(game: String) -> bool:
   if game in minigames_completed:
     return minigames_completed[game]
   return false
@@ -92,7 +92,7 @@ const PLACE_NAMES = {
   }
 
 const DIALOGUE_TEMPLATES = [
-  "Hello, Shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and my armour also needs to deal with {req1} conditions, and I'll be travelling {magic}.",
+  "Hello, Shopkeeper. I'm headed off on an adventure to somewhere that is {req0}, and my armour also needs to deal with {req1} conditions. I'll be travelling {magic}.",
   "Dear Shopkeeper, I am in need of some armour to protect me from somewhere {req0}. Oh, and also protect me from {req1} dangers. I will be going {magic}.",
   "Well met, Shopkeeper. I require some of your finest armour to protect me from someplace {req0} and also be properly equipped for {req1} conditions. My journey sends me {magic}."]
 
@@ -175,7 +175,7 @@ func get_newspaper_article() -> String:
     4:
       return customer_name + " succeeded in traversing through " + place + " to deliver their parcel, aided by the power of " + magic + ". The recipient was thrilled and the courier made their way home safely thanks to " + equipment + "."
     5:
-      return customer_name + " failed in traversing through " + place + " delivering their parcel, despite having " + magic + ". it was not enough. " + equipment + " was frail and destroyed enroute. The recipient was distraught to learn of their passing."
+      return customer_name + " failed in traversing through " + place + " delivering their parcel, despite having " + magic + ", it was not enough. " + equipment + " was frail and destroyed enroute. The recipient was distraught to learn of their passing."
     _:
       return "No news today."
 

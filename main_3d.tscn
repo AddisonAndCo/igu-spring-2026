@@ -50,7 +50,7 @@ flip_h = true
 texture = ExtResource("10_238tj")
 
 [node name="subText" type="Sprite3D" parent="." unique_id=795510244]
-transform = Transform3D(0.235, 0, 0, 0, 0.14, 0, 0, 0, 0.645, -2.0830436, 3.3621793, -0.531)
+transform = Transform3D(0.235, 0, 0, 0, 0.14, 0, 0, 0, 0.645, -1.9421446, 3.3167968, -0.531)
 texture = SubResource("ViewportTexture_0xv2w")
 
 [node name="SpeechBubbleRoot" type="Node3D" parent="." unique_id=1072704619]
