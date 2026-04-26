@@ -3,8 +3,8 @@ extends Node
 signal day_randomized
 enum MissionType {COMBAT, DELIVERY}
 var mission_type = MissionType.DELIVERY # This will change per day ?
-var customer_name: String = "" 
-var customer_requirements: Array[String] = [] 
+var customer_name: String = ""
+var customer_requirements: Array[String] = []
 var required_magic = MagicElement.Type.WATER  # set per day
 var equipped_items = []
 var equipped_stats: Array[String] = [] # What the player equipped
@@ -33,7 +33,7 @@ func randomize_day():
   var magic_types = MagicElement.Type.values()
   required_magic = magic_types[randi() % magic_types.size()]
   emit_signal("day_randomized")
-    
+
   var req_keys = STAT_GROUPS.keys()
   req_keys.shuffle()
   customer_requirements = Array(req_keys.slice(0, 2), TYPE_STRING, "", null)
@@ -71,7 +71,7 @@ func check_day_complete():
     if not minigames_completed[game]:
       return
   emit_signal("day_complete") #trigger the newspaper
-  
+
 const CHARACTERS = [
   {"name": "Elaria", "sprite": preload("res://Art for Shop Game/Characters/female2.png")},
   {"name": "Asema", "sprite": preload("res://Art for Shop Game/Characters/male1.png")},
@@ -81,7 +81,7 @@ var current_character = CHARACTERS[0]
 func randomize_character():
   current_character = CHARACTERS[randi() % CHARACTERS.size()]
   customer_name = current_character.name
-  
+
 const PLACE_NAMES = {
   "+Fire Resistance": ["the Volcanic Valley", "the Ember Wastes"],
   "+Poison Resistance": ["the Poisonous Prison", "the Toxic Temple"],
@@ -117,9 +117,9 @@ func get_customer_dialogue() -> String:
     keys.shuffle()
     var word1 = STAT_GROUPS[keys[0]][randi() % STAT_GROUPS[keys[0]].size()]
     var word2 = STAT_GROUPS[keys[1]][randi() % STAT_GROUPS[keys[1]].size()]
-    
+
     var magic_hint = MAGIC_DESCRIPTIONS[required_magic][randi() % MAGIC_DESCRIPTIONS[required_magic].size()]
-    
+
     var template = DIALOGUE_TEMPLATES[randi() % DIALOGUE_TEMPLATES.size()]
     return template.replace("{req0}", word1).replace("{req1}", word2).replace("{magic}", magic_hint)
 
@@ -128,7 +128,7 @@ func get_place() -> String:
         var places = PLACE_NAMES.get(customer_requirements[0], ["the Unknown Lands"])
         return places[randi() % places.size()]
     return "the Unknown Lands"
-    
+
 func get_magic_name() -> String:
   match required_magic:
     MagicElement.Type.WATER: return "Water Breathing"
@@ -136,7 +136,7 @@ func get_magic_name() -> String:
     MagicElement.Type.HEAL: return "Healing"
     MagicElement.Type.FLIGHT: return "Flight"
   return "magic"
-  
+
 func get_equipment_name() -> String:
     if equipped_items.is_empty():
         return "their equipment"
@@ -164,7 +164,7 @@ func get_newspaper_article() -> String:
   var magic = get_magic_name()
   var place = get_place()
   var equipment = get_equipment_name()
-  
+
   match outcome:
     1:
       return customer_name + " defeated the enemy in " + place + ". " + equipment + " proved extremely valuable and impactful. They say that without it, they would have surely perished."

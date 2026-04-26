@@ -18,13 +18,14 @@ func _ready():
   dressup_layer.visible = false
   dressup.visible = false
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-  
+
   dressup_trigger.clicked.connect(_on_dressup_clicked)
   dressup.dressup_finished.connect(_on_dressup_closed)
   dressup.dressup_back_requested.connect(_on_game_back)
-  
+
   tome.clicked.connect(_on_tome_clicked)
   Daymanager.day_complete.connect(_on_day_complete)
+
 
 func _on_dressup_clicked():
   in_minigame = true
@@ -60,7 +61,7 @@ func _on_tome_clicked():
 
   in_minigame = true
   Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-  #Input.set_custom_mouse_cursor(preload("res://assets/Cursors/cursor_quill.png")) 
+  #Input.set_custom_mouse_cursor(preload("res://assets/Cursors/cursor_quill.png"))
   if highlighted_object:
     highlighted_object.on_hover_exit()
     highlighted_object = null
@@ -85,7 +86,7 @@ func _on_magic_game_complete(_magic_type: String, _success: bool) -> void:
   else:
     assert(false)
   in_minigame = false
-  #Input.set_custom_mouse_cursor(null)
+  Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _process(_delta):
@@ -109,6 +110,7 @@ func _process(_delta):
       hover_object.on_hover_enter()
     highlighted_object = hover_object
 
+
 func _input(event):
   if in_minigame:
     if event is InputEventMouseMotion:
@@ -125,8 +127,10 @@ func _input(event):
   if event.is_action_pressed("ui_cancel"):
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+
 func _on_day_complete():
   get_tree().change_scene_to_file("res://newspaper.tscn")
+
 
 func _physics_process(delta):
   if not is_on_floor():

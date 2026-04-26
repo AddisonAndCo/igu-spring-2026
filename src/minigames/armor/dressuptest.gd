@@ -14,7 +14,7 @@ func _ready():
 
 func _on_back_pressed() -> void:
   dressup_back_requested.emit(self)
-  
+
 func _on_button_pressed():
   print("button pressed!!!")
   finalized = true
