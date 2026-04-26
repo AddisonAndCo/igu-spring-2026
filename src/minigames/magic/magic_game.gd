@@ -20,6 +20,7 @@ func _ready() -> void:
     var path = bank_root + el + ".yaml"
     var parser = YAMLParser.new()
 
+    print(path)
     var yfile = FileAccess.open(path, FileAccess.READ)
     var yaml = yfile.get_as_text()
     yfile.close()
